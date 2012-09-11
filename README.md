@@ -1,8 +1,5 @@
-metrics-watcher
+Metrics-Watcher
 ===============
-Copyright 2012 Ben Bertola and iovation, Inc.
-===========
-
 JavaScript library that graphs Metrics(http://metrics.codahale.com) and allows for 
 real time updating of graph data using the Metrics servlet.
 
