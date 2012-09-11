@@ -1,16 +1,47 @@
 /********************************************************
- * Public API
+ * Metrics-Watcher 
+ * 
+ * Copyright 2012 Ben Bertola and iovation, Inc.
+ * 
  *******************************************************/
+
+/**
+ * Adds a Meter type graph to your page.
+ * @param divId The id of the div to draw the graph in
+ * @param className The class name of your metrics data, from the metrics servlet
+ * @param metricName The metric name of your metrics data, from the metrics servlet
+ * @param max What the max value target is, used to determine the % width of progress bars for this graph
+ * @param title The user-displayed title of this graph
+ */
 function addMeter(divId, className, metricName, max, title){
 	var metricInfo = new MetricInfo(divId, className, metricName, max, title, 'meter');
 	graphs.push(metricInfo);
 }
 
+/**
+ * Add a Counter graph
+ * @param divId The id of the div to draw the graph in
+ * @param className The class name of your metrics data, from the metrics servlet
+ * @param metricName The metric name of your metrics data, from the metrics servlet
+ * @param max What the max value target is, used to determine the % width of progress bars for this graph
+ * @param title The user-displayed title of this graph
+ */
 function addCounter(divId, className, metricName, max, title){
 	var metricInfo = new MetricInfo(divId, className, metricName, max, title, 'counter');
 	graphs.push(metricInfo);
 }
 
+/**
+ * Add a linked Counter graph.  Linked Counters differ from a plain counter graph in that both the numerator and denominator
+ * of a linked counter graph each come from individual Counter Metrics.
+ * 
+ * @param divId The id of the div to draw the graph in
+ * @param className The class name of your metrics data, from the metrics servlet
+ * @param metricName The metric name of your metrics data, from the metrics servlet
+ * @param maxClassName
+ * @param maxMetricName
+ * @param title The user-displayed title of this graph
+ */
 function addLinkedCounter(divId, className, metricName, maxClassName, maxMetricName, title){
 	var metricInfo = new MetricInfo(divId, className, metricName, null, title, 'counter');
 	metricInfo.maxClassName = maxClassName;
@@ -72,9 +103,6 @@ function initGraphs(){
 }
 
 function updateGraphs(json){
-	if(!json){
-		json = metricsData;
-	}
 	//draw all graphs for the first time
 	for(var i = 0; i < graphs.length; i++){
 		if(graphs[i].type == "meter")

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Metrics-Watcher</title>
+
+<style>
+body {
+	padding-top: 60px;
+	/* 60px to make the container go all the way to the bottom of the topbar */
+}
+</style>
+
+<!--  You must include bootstrap -->
+<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+<!-- And include jquery -->
+<script language="JavaScript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+<script language="JavaScript"
+	src="http://jquery-json.googlecode.com/files/jquery.json-2.2.min.js"></script>
+
+<!--  And include the metrics-watcher library -->
+<script language="JavaScript" src="../metrics-watcher.js"></script>
+
+<!--  Here is the sample data - this would normally come from an Ajax call to the Metrics servlet -->
+<script language="JavaScript" src="example-metrics.js"></script>
+
+
+<!-- And include the metrics stylesheet -->
+<link href="../metrics-watcher-style.css" rel="stylesheet">
+
+<script>
+	// See example-metrics.js for sample of the Metrics-servlet format
+	function addGraphs() {
+		addMeter("meterExample", "com.iovation.metrics.watcher.example.Dao",
+				"dao-writes-meter", 500, "Database Writes(Meter)");
+
+		addCounter("counterExample",
+				"com.iovation.metrics.watcher.example.ConnectionPool",
+				"connectionsCreatedCounter", 125,
+				"Open/Max Connections(Counter)");
+
+		addLinkedCounter("linkedCounterExample",
+				"com.iovation.metrics.watcher.example.ConnectionPool",
+				"connectionsInUseCounter",
+				"com.iovation.metrics.watcher.example.ConnectionPool",
+				"connectionsCreatedCounter",
+				"In Use/Open Connections(Linked Counter)");
+
+		addTimer("timerExample",
+				"com.iovation.metrics.watcher.example.Service",
+				"requestsTimer", 125, "Service Requests(Timer)", "requests", 50);
+	}
+
+	$(document).ready(function() {
+		addGraphs();
+		initGraphs();
+		keepUpdatingGraphs();
+	});
+
+	function keepUpdatingGraphs() {
+		downloadMetricData();
+		setTimeout(keepUpdatingGraphs, 1000);
+	}
+
+	function downloadMetricData() {
+		updateGraphs(exampleMetricsData);
+		// Normally metric data will be loaded from a servlet with an Ajax call like the following.
+		// For this example, it is hardcoded.
+		//
+		// 		url = "metrics/metrics";
+		// 		$.ajax({
+		// 			contentType : "application/json",
+		// 			url : url,
+		// 			success : function(data) {
+		// 				updateGraphs(data);
+		// 			},
+		// 			error : function(xhr, ajaxOptions, thrownError) {
+		// 				alert("Error - " + xhr.status + "Message: " + thrownError);
+		// 			},
+		// 			async : false
+		// 		});
+	}
+</script>
+
+</head>
+
+<body>
+
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> </a> <a
+					class="brand" href="#"> Metrics Watcher Example</a>
+				<div class="nav-collapse">
+					<ul class="nav">
+
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+
+	<div class="container mainContent">
+<!-- 
+		<div class="hero-unit">
+			<h1>Metrics Watcher</h1>
+			<p>Real-time graphing of your Java application Metrics(http://metrics.codahale.com)</p>
+			<p>
+				
+			</p>
+		</div>
+ -->
+		<h1>Metrics Watcher Examples</h1>
+
+		<p>Here are examples of the different gauge types that
+			Metrics-watcher currently supports. You can view the source of this
+			page for sample usage, and the source of metrics-watcher.js for API
+			documentation.</p>
+
+		<div class="row">
+			<div id="meterExample" class="span3"></div>
+			<div id="counterExample" class="span3"></div>
+			<div id="linkedCounterExample" class="span6"></div>
+		</div>
+
+		<div class="row">
+			<div id="timerExample" class="span12"></div>
+		</div>
+	</div>
+	<!-- /container -->
+
+	<!-- Le javascript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<!-- <script src="bootstrap/js/jquery.js"></script> -->
+	<script src="bootstrap/js/bootstrap-transition.js"></script>
+	<script src="bootstrap/js/bootstrap-alert.js"></script>
+	<script src="bootstrap/js/bootstrap-modal.js"></script>
+	<script src="bootstrap/js/bootstrap-dropdown.js"></script>
+	<script src="bootstrap/js/bootstrap-scrollspy.js"></script>
+	<script src="bootstrap/js/bootstrap-tab.js"></script>
+	<script src="bootstrap/js/bootstrap-tooltip.js"></script>
+	<script src="bootstrap/js/bootstrap-popover.js"></script>
+	<script src="bootstrap/js/bootstrap-button.js"></script>
+	<script src="bootstrap/js/bootstrap-collapse.js"></script>
+	<script src="bootstrap/js/bootstrap-carousel.js"></script>
+	<script src="bootstrap/js/bootstrap-typeahead.js"></script>
+
+
+</body>
+</html>

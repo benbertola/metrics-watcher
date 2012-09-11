@@ -1,10 +1,16 @@
 metrics-watcher
 ===============
+Copyright 2012 Ben Bertola and iovation, Inc.
+===========
 
-JavaScript library that graphs Metrics(http://metrics.codahale.com) and allows for realtime updating of graph data using the Metrics servlet.
+JavaScript library that graphs Metrics(http://metrics.codahale.com) and allows for 
+real time updating of graph data using the Metrics servlet.
 
 This library depends on using the following other libraries in your applications:
-- Metrics is a Java library used for monitoring your application performance and behaviors.  It provides many useful metric implementations such as a Timer, Counter, and Meter.
+- Metrics is a Java library used for monitoring your application performance and behaviors.  
+	It provides many useful metric implementations such as a Timer, Counter, and Meter.
 - Metrics-servlet allows you to expose this metric information as JSON data.
+- Bootstrap(http://twitter.github.com/bootstrap/) is an open source UI framework written by Twitter and is used for Metrics-watcher layout and progress bars
+- jQuery(http://jquery.com/).  Enough said.
 
-The Metrics-Watcher library can read data in this JSON format and will generate a dynamic HTML graph.
+You can find a working example in the examples folder, and view it's source to get a better idea of the usage.
