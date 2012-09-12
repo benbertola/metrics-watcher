@@ -3,6 +3,11 @@
  * 
  * Copyright 2012 Ben Bertola and iovation, Inc.
  * 
+ * To use this library:
+ * 1.  Call addXXX() for each graph you want on your page
+ * 2.  Call initGraphs() once to draw the initial graphs
+ * 3.  Call updateGraphs(jsonData) with the JSON data from your metrics/servlet as often as you would like your graphs to update.
+ * 
  *******************************************************/
 
 /**
@@ -54,6 +59,17 @@ function addLinkedCounter(divId, className, metricName, maxClassName, maxMetricN
 	graphs.push(metricInfo);
 }
 
+/**
+ * Add a Timer graph.  This will include a Meter, Timing Info, and a Histogram.
+ * 
+ * @param divId The id of the div to draw the graph in
+ * @param className The class name of your metrics data, from the metrics servlet
+ * @param metricName The metric name of your metrics data, from the metrics servlet
+ * @param max The max target value for the Meter, showing frequency
+ * @param title The user-displayed title of this graph
+ * @param eventType a name for this event type
+ * @param durationMax The max target value for duration
+ */
 function addTimer(divId, className, metricName, max, title, eventType, durationMax){
 	var metricInfo = new MetricInfo(divId, className, metricName, max, title, 'timer');
 	metricInfo.eventType = eventType;
@@ -87,6 +103,9 @@ function addTimer(divId, className, metricName, max, title, eventType, durationM
 	graphs.push(metricInfo);
 }
 
+/**
+ * Initialized each of the graphs that you have added through addXXX() calls, and draws them on the screen for the first time
+ */
 function initGraphs(){
 	//draw all graphs for the first time
 	for(var i = 0; i < graphs.length; i++){
@@ -102,6 +121,11 @@ function initGraphs(){
 	
 }
 
+/**
+ * Update the existing graphs with new data.  You can call this method as frequently as you would like to, and all graph info will be updated.
+ * 
+ * @param json The root of the json node returned from your ajax call to the metrics servlet
+ */
 function updateGraphs(json){
 	//draw all graphs for the first time
 	for(var i = 0; i < graphs.length; i++){
@@ -244,7 +268,6 @@ function updateDurationStats(timerInfo, json){
 function updateDuration(timerStatsDivId, durationData, style, max){
 	$(timerStatsDivId + " tr." + style + " td.progressValue").html(formatNumber(durationData[style]));
 	$(timerStatsDivId + " tr." + style + " td.progressBar div.progress div.bar").css("width", calculatePercentage(durationData[style], max) + "%");
-	//$("#" + meterInfo.divId + " tr." + rowStyle + " td.progressBar div.progress div.bar").css("width", calculatePercentage(meterData[rowType], meterInfo.max) + "%");
 }
 
 function updateDurationHistogram(timerInfo, json){
