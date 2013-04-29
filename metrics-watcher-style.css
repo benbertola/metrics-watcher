@@ -1,38 +1,69 @@
 
-.metricGraph {
-	width: 250px;
+.metricsWatcher fieldset legend {
+	margin-bottom: 5px;
+	border-bottom: none;
+}
+
+.metricsWatcher .nested {
+	margin: 0 10px 10px 0;
+}
+.metricsWatcher .nested h1 {
+	font-size: 24px;
+}
+
+.metricsWatcher .progressLabel {
+	text-align: right;
+	vertical-align: top;
+	color: #666;
+}
+
+.metricsWatcher.timer .timerContainer td,
+.metricsWatcher .progressLabel,
+.metricsWatcher .progressValue {
+	vertical-align: top;
+}
+.metricsWatcher .progressValue {
+	color: #666;
+}
+.metricsWatcher .progress {
+	margin-bottom: 17px;
+}
+
+.metricsWatcher.timer table,
+.metricsWatcher.web table,
+.metricsWatcher.cache table,
+.metricsWatcher.jvm table,
+.metricsWatcher.metricGraph .progressBar,
+.metricsWatcher .metricGraph .progressBar,
+.metricsWatcher.metricGraph .progressTable {
+	width: 100%;
+}
+
+.metricsWatcher.jvm .jvmContainer,
+.metricsWatcher.web .webContainer,
+.metricsWatcher.cache .cacheContainer,
+.metricsWatcher.timer .timerContainer,
+.metricsWatcher.cache .gaugeTableContainer {
 	border-style: solid;
 	border-width: 1px;
-	text-align: center;
+	padding: 10px 0;
+	margin-left: 0;
 	padding: 10px;
 }
 
-.metricGraph .progressTable {
-	width: 100%;
+.metricsWatcher.cache table.gaugeTable td,
+.metricsWatcher.jvm table.jvmTable td {
+	vertical-align: top;
+	padding: 6px 0;
 }
-
-.metricGraph .progressLabel {
+.metricsWatcher.cache table.gaugeTable td h5,
+.metricsWatcher.jvm table.jvmTable td h5 {
+	font-size: 15px;
+	font-weight: normal;
+	text-align: left;
+}
+.metricsWatcher table.gaugeTable td,
+.metricsWatcher table.jvmTable td {
+	font-size: 14px;
 	text-align: right;
-	vertical-align: top;
-}
-
-.metricGraph .progressValue {
-	vertical-align: top;
-}
-
-.metricGraph .progressBar {
-	width: 100%;
-}
-
-.timerGraph {
-	border-style: solid;
-	border-width: 1px;
-	margin: 10px;
-	padding 10px;
-	text-align: center;
-	width: 1170px;
-}
-
-.timerGraph .metricGraph {
-	border-style: none;
 }
