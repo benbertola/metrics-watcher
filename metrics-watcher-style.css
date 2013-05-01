@@ -1,7 +1,37 @@
-
+.metricsWatcher h1 {
+	font-size: 30px;
+	line-height: 36px;
+	margin: 0;
+}
+.metricsWatcher h3 {
+	font-size: 18px;
+	line-height: 27px;
+	margin: 0;
+}
+.metricsWatcher h4 {
+	font-size: 14px;
+	line-height: 18px;
+	margin: 0;
+}
+.metricsWatcher h5 {
+	font-size: 18px;
+	line-height: 18px;
+	margin: 0;
+}
+.metricsWatcher p {
+	font-size: 13px;
+	line-height: 18px;
+}
 .metricsWatcher fieldset legend {
 	margin-bottom: 5px;
 	border-bottom: none;
+	color: inherit;
+}
+.metricsWatcher .activeRequestsGraph {
+	vertical-align: top;
+}
+.metricsWatcher .activeRequestsGraph .counter {
+	width: 95%;
 }
 
 .metricsWatcher .nested {
@@ -13,7 +43,6 @@
 
 .metricsWatcher .progressLabel {
 	text-align: right;
-	vertical-align: top;
 	color: #666;
 }
 
@@ -21,11 +50,15 @@
 .metricsWatcher .progressLabel,
 .metricsWatcher .progressValue {
 	vertical-align: top;
+	padding: 0 5px;
 }
 .metricsWatcher .progressValue {
+	font-size: 13px;
+	line-height: 18px;
 	color: #666;
 }
 .metricsWatcher .progress {
+	height: 18px;
 	margin-bottom: 17px;
 }
 
@@ -33,10 +66,12 @@
 .metricsWatcher.web table,
 .metricsWatcher.cache table,
 .metricsWatcher.jvm table,
-.metricsWatcher.metricGraph .progressBar,
-.metricsWatcher .metricGraph .progressBar,
-.metricsWatcher.metricGraph .progressTable {
+.metricsWatcher .progressBar,
+.metricsWatcher .progressBar,
+.metricsWatcher .progressTable {
 	width: 100%;
+	font-size: 13px;
+	line-height: 18px;
 }
 
 .metricsWatcher.jvm .jvmContainer,
