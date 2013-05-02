@@ -417,13 +417,25 @@
 		// set the big counter
 		var gaugeDiv = $("#" + meterInfo.divId + " p");
 
-		// and the {whats}/{time unit} value
+		// the type per unit
 		var eventType = meterInfo.eventType;
 		if (!eventType) {
 			eventType = meterData["event_type"];
 		}
 
-		gaugeDiv.html("Moving average of " + meterData.count + " " + eventType);
+		// some naive pluralization rules, can get more fancy if needed
+		if (meterData.count > 1 && eventType === "get") {
+			eventType = "gets";
+		} else if (meterData.count > 1 && eventType === "put") {
+			eventType = "puts";
+		}
+
+		var unit = meterData.unit;
+		if (unit === "seconds") {
+			unit = "second";
+		}
+
+		gaugeDiv.html(meterData.count + " " + eventType + " per " + unit);
 
 		// set the mean count
 		setMeterRow(meterInfo, meterData, "mean", "mean");

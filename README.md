@@ -11,3 +11,4 @@ This library depends on using the following other libraries in your applications
 - jQuery(http://jquery.com/).  Enough said.
 
 You can find a working example in the examples folder, and view it's source to get a better idea of the usage.
+You can also find an example of metrics-watcher integrated into a java webapp here: https://github.com/depsypher/flapjack
