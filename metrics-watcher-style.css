@@ -1,38 +1,104 @@
+.metricsWatcher h1 {
+	font-size: 30px;
+	line-height: 36px;
+	margin: 0;
+}
+.metricsWatcher h3 {
+	font-size: 18px;
+	line-height: 27px;
+	margin: 0;
+}
+.metricsWatcher h4 {
+	font-size: 14px;
+	line-height: 18px;
+	margin: 0;
+}
+.metricsWatcher h5 {
+	font-size: 18px;
+	line-height: 18px;
+	margin: 0;
+}
+.metricsWatcher p {
+	font-size: 13px;
+	line-height: 18px;
+}
+.metricsWatcher fieldset legend {
+	margin-bottom: 5px;
+	border-bottom: none;
+	color: inherit;
+}
+.metricsWatcher .activeRequestsGraph {
+	vertical-align: top;
+}
+.metricsWatcher .activeRequestsGraph .counter {
+	width: 95%;
+}
 
-.metricGraph {
-	width: 250px;
+.metricsWatcher .nested {
+	margin: 0 10px 10px 0;
+}
+.metricsWatcher .nested h1 {
+	font-size: 24px;
+}
+
+.metricsWatcher .progressLabel {
+	text-align: right;
+	color: #666;
+}
+
+.metricsWatcher.timer .timerContainer td,
+.metricsWatcher .progressLabel,
+.metricsWatcher .progressValue {
+	vertical-align: top;
+	padding: 0 5px;
+}
+.metricsWatcher .progressValue {
+	font-size: 13px;
+	line-height: 18px;
+	color: #666;
+}
+.metricsWatcher .progress {
+	height: 18px;
+	margin-bottom: 17px;
+}
+
+.metricsWatcher.timer table,
+.metricsWatcher.web table,
+.metricsWatcher.cache table,
+.metricsWatcher.jvm table,
+.metricsWatcher .progressBar,
+.metricsWatcher .progressBar,
+.metricsWatcher .progressTable {
+	width: 100%;
+	font-size: 13px;
+	line-height: 18px;
+}
+
+.metricsWatcher.jvm .jvmContainer,
+.metricsWatcher.web .webContainer,
+.metricsWatcher.cache .cacheContainer,
+.metricsWatcher.timer .timerContainer,
+.metricsWatcher.cache .gaugeTableContainer {
 	border-style: solid;
 	border-width: 1px;
-	text-align: center;
+	padding: 10px 0;
+	margin-left: 0;
 	padding: 10px;
 }
 
-.metricGraph .progressTable {
-	width: 100%;
+.metricsWatcher.cache table.gaugeTable td,
+.metricsWatcher.jvm table.jvmTable td {
+	vertical-align: top;
+	padding: 6px 0;
 }
-
-.metricGraph .progressLabel {
+.metricsWatcher.cache table.gaugeTable td h5,
+.metricsWatcher.jvm table.jvmTable td h5 {
+	font-size: 15px;
+	font-weight: normal;
+	text-align: left;
+}
+.metricsWatcher table.gaugeTable td,
+.metricsWatcher table.jvmTable td {
+	font-size: 14px;
 	text-align: right;
-	vertical-align: top;
-}
-
-.metricGraph .progressValue {
-	vertical-align: top;
-}
-
-.metricGraph .progressBar {
-	width: 100%;
-}
-
-.timerGraph {
-	border-style: solid;
-	border-width: 1px;
-	margin: 10px;
-	padding 10px;
-	text-align: center;
-	width: 1170px;
-}
-
-.timerGraph .metricGraph {
-	border-style: none;
 }
