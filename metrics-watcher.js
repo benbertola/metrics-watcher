@@ -435,7 +435,7 @@
 			unit = "second";
 		}
 
-		gaugeDiv.html(meterData.count + " " + eventType + " per " + unit);
+		gaugeDiv.html(eventType + " per " + unit + " (" + meterData.count + " total)");
 
 		// set the mean count
 		setMeterRow(meterInfo, meterData, "mean", "mean");
