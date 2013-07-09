@@ -35,8 +35,10 @@
 	 * @param max What the max value target is, used to determine the % width of progress bars for this graph
 	 * @param title The user-displayed title of this graph
 	 */
-	metricsWatcher.addMeter = function(divId, className, metricName, max, title) {
+	metricsWatcher.addMeter = function(divId, className, metricName, max, title, eventType) {
+		if (eventType == undefined) eventType = 'Calls';
 		var metricInfo = new MetricInfo(divId, className, metricName, max, title, 'meter');
+		metricInfo.eventType = eventType;
 		graphs.push(metricInfo);
 	}
 
@@ -356,7 +358,9 @@
 	}
 
 	function updateDurationStats(timerInfo, json) {
-		var metricData = timerInfo.getMetricNode(timerInfo.className, timerInfo.metricName, json)["duration"];
+		var metricNode = timerInfo.getMetricNode(timerInfo.className, timerInfo.metricName, json);
+		if (!metricNode) return;
+		var metricData = metricNode["duration"];
 
 		var timeUnitDiv = $(timerInfo.getTimerStatsDivId() + " p");
 		timeUnitDiv.html(capitalizeFirstLetter(metricData["unit"]));
@@ -375,7 +379,9 @@
 	}
 
 	function updateDurationHistogram(timerInfo, json) {
-		var metricData = timerInfo.getMetricNode(timerInfo.className, timerInfo.metricName, json)["duration"];
+		var metricNode = timerInfo.getMetricNode(timerInfo.className, timerInfo.metricName, json);
+		if (!metricNode) return;
+		var metricData = metricNode["duration"];
 
 		updateDuration(timerInfo.getTimerHistogramDivId(), metricData, "p999", timerInfo.durationMax);
 		updateDuration(timerInfo.getTimerHistogramDivId(), metricData, "p99", timerInfo.durationMax);
