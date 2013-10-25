@@ -48,6 +48,7 @@
 
 			metricsWatcher.addTimer("timerExample", "flapjack.controller.HomeController", "home", 125, "Timer", "requests", 50);
 			metricsWatcher.addCache("queryCache", "net.sf.ehcache.Cache.flapjack.org.hibernate.cache.internal.StandardQueryCache", "Ehcache");
+			metricsWatcher.addLog4j("log4jExample", "org.apache.log4j.Appender", "Log4j");
 			metricsWatcher.addWeb("webExample", "com.yammer.metrics.web.WebappMetricsFilter", "Web Server");
 			metricsWatcher.addJvm("jvmExample", "jvm", "JVM");
 		}
@@ -115,6 +116,10 @@
 			<div id="webExample"></div>
 		</div>
 		<br/>
+		<div class="row-fluid">
+			<div id="log4jExample"></div>
+		</div>
+		<br />
 		<div class="row-fluid">
 			<div id="jvmExample"></div>
 		</div>

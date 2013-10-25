@@ -635,4 +635,76 @@ var exampleMetricsData = {
 			"count": 95
 		}
 	},
+	"org.apache.log4j.Appender": {
+		"all": {
+			"type": "meter",
+			"event_type": "statements",
+			"unit": "seconds",
+			"count": 20279,
+			"mean": 10.46,
+			"m1": 12.94,
+			"m5": 10.111,
+			"m15": 7.205
+		},
+		"debug": {
+			"type": "meter",
+			"event_type": "statements",
+			"unit": "seconds",
+			"count": 0,
+			"mean": 0,
+			"m1": 0,
+			"m5": 0,
+			"m15": 0
+		},
+		"error": {
+			"type": "meter",
+			"event_type": "statements",
+			"unit": "seconds",
+			"count": 1,
+			"mean": 0.000005,
+			"m1": 0,
+			"m5": 0,
+			"m15": 0
+		},
+		"fatal": {
+			"type": "meter",
+			"event_type": "statements",
+			"unit": "seconds",
+			"count": 0,
+			"mean": 0,
+			"m1": 0,
+			"m5": 0,
+			"m15": 0
+		},
+		"info": {
+			"type": "meter",
+			"event_type": "statements",
+			"unit": "seconds",
+			"count": 20265,
+			"mean": 10.45,
+			"m1": 12.94,
+			"m5": 10.111,
+			"m15": 7.205
+		},
+		"trace": {
+			"type": "meter",
+			"event_type": "statements",
+			"unit": "seconds",
+			"count": 0,
+			"mean": 0,
+			"m1": 0,
+			"m5": 0,
+			"m15": 0
+		},
+		"warn": {
+			"type": "meter",
+			"event_type": "statements",
+			"unit": "seconds",
+			"count": 13,
+			"mean": 0.000067097483045059,
+			"m1": 0,
+			"m5": 0,
+			"m15": 0
+		}
+	},
 };

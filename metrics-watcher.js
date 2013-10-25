@@ -173,6 +173,31 @@
 	}
 
 	/**
+	 * Add a log4j logged events graph.
+	 *
+	 * @param divId The id of the div to draw the graph in
+	 * @param className The class name of your metrics data, from the metrics servlet
+	 * @param title The user-displayed title of this graph
+	 */
+	metricsWatcher.addLog4j = function(divId, className, title) {
+		var metricInfo = new MetricInfo(divId, className, null, null, title, "log4j");
+
+		metricInfo.components = {
+			meters : [
+				new MetricInfo(divId + " td.all", className, "all", 100, "all", "meter"),
+				new MetricInfo(divId + " td.fatal", className, "fatal", 100, "fatal", "meter"),
+				new MetricInfo(divId + " td.error", className, "error", 100, "error", "meter"),
+				new MetricInfo(divId + " td.warn", className, "warn", 100, "warn", "meter"),
+				new MetricInfo(divId + " td.info", className, "info", 100, "info", "meter"),
+				new MetricInfo(divId + " td.debug", className, "debug", 100, "debug", "meter"),
+				new MetricInfo(divId + " td.trace", className, "trace", 100, "trace", "meter")
+			]
+		};
+
+		graphs.push(metricInfo);
+	}
+    
+	/**
 	 * Initialized each of the graphs that you have added through addXXX() calls,
 	 * and draws them on the screen for the first time
 	 */
@@ -193,6 +218,8 @@
 				drawJvm(graphs[i]);
 			else if (graphs[i].type == "web")
 				drawWeb(graphs[i]);
+			else if (graphs[i].type == "log4j")
+				drawLog4j(graphs[i]);
 			else
 				alert("Unknown meter info type: " + graphs[i].type);
 		}
@@ -220,6 +247,8 @@
 				updateJvm(graphs[i], json);
 			else if (graphs[i].type == "web")
 				updateWeb(graphs[i], json);
+			else if (graphs[i].type == "log4j")
+				updateLog4j(graphs[i], json);
 			else
 				alert("Unknown meter info type: " + graphs[i].type);
 		}
@@ -649,4 +678,42 @@
 		}
 	}
 
+	/*
+	 * Log4j events stream  methods
+	 */
+	function drawLog4j(log4jInfo) {
+		var parentDiv = $("#" + log4jInfo.divId);
+		var html = "<div class='metricsWatcher log4j metricGraph span12'>"
+				+ "<fieldset><legend><h1>" + log4jInfo.title + "</h1></legend>"
+				+ "<div class='log4jContainer span12'>"
+				+ "	<div id='" + log4jInfo.divId + "Log4j'></div>"
+				+ "<table><tr>"
+				+ "<td colspan='4' class='span12'></td>"
+				+ "</tr><tr>"
+				+ "<td class='all span3'></td>"
+				+ "<td class='fatal span3'></td>"
+				+ "<td class='error span3'></td>"
+				+ "<td class='warn span3'></td>"
+				+ "</tr><tr>"
+				+ "<td class='info span3'></td>"
+				+ "<td class='debug span3'></td>"
+				+ "<td class='trace span3'></td>"
+				+ "</tr></table>"
+				+ "</div>"
+				+ "</fieldset></div>";
+		parentDiv.html(html);
+
+		var length = log4jInfo.components.meters.length;
+		for (var i = 0; i < length; i++) {
+			drawMeter(log4jInfo.components.meters[i]);
+		}
+	}
+
+	function updateLog4j(log4jInfo, json) {
+		var length = log4jInfo.components.meters.length;
+		for (var i = 0; i < length; i++) {
+			updateMeter(log4jInfo.components.meters[i], json);
+		}
+	}
+    
 }(window.metricsWatcher = window.metricsWatcher || {}, jQuery));
