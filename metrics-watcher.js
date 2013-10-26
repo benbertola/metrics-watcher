@@ -322,7 +322,7 @@
 	function drawCounter(counterInfo) {
 		var parentDiv = $("#" + counterInfo.divId);
 		var html = "<div class='metricsWatcher counter counterGraph'><h3>" + counterInfo.title
-				+ "</h3><div class='progress'><div class='bar' style='width: 0%;'></div></div></div>";
+				+ "</h3><div class='progress'><div class='progress-bar' style='width: 0%;'></div></div></div>";
 		parentDiv.html(html);
 	}
 
@@ -330,8 +330,8 @@
 		var metricData = counterInfo.getMetricNode(counterInfo.className, counterInfo.metricName, json);
 		var pct = calculatePercentage(metricData.count, counterInfo.getMax(json));
 
-		$("#" + counterInfo.divId + " div.progress div.bar").css("width", pct + "%");
-		$("#" + counterInfo.divId + " div.progress div.bar").html(metricData.count + "/" + counterInfo.getMax(json));
+		$("#" + counterInfo.divId + " div.progress div.progress-bar").css("width", pct + "%");
+		$("#" + counterInfo.divId + " div.progress div.progress-bar").html(metricData.count + "/" + counterInfo.getMax(json));
 	}
 
 	/*
@@ -341,13 +341,13 @@
 		var parentDiv = $("#" + timerInfo.divId);
 
 		var nested = (timerInfo.isNested) ? " nested" : "";
-		var html = "<div class='metricsWatcher timer timerGraph" + nested + "'>"
+		var html = "<div class='metricsWatcher timer timerGraph" + nested + " col-md-12'>"
 				+ "<fieldset><legend><h1>" + timerInfo.title + "</h1></legend>"
-				+ "<div class='timerContainer span12'>"
+				+ "<div class='timerContainer col-md-12'>"
 				+ "<table><tr>"
-				+ "<td class='meterGraph span4'></td>"
-				+ "<td class='timerStatsGraph span4'></td>"
-				+ "<td class='timerHistogram span4'></td>"
+				+ "<td class='meterGraph col-md-4'></td>"
+				+ "<td class='timerStatsGraph col-md-4'></td>"
+				+ "<td class='timerHistogram col-md-4'></td>"
 				+ "</tr></table></div></fieldset>";
 		parentDiv.html(html);
 
@@ -403,7 +403,7 @@
 
 	function updateDuration(timerStatsDivId, durationData, style, max) {
 		$(timerStatsDivId + " tr." + style + " td.progressValue").html(formatNumber(durationData[style]));
-		$(timerStatsDivId + " tr." + style + " td.progressBar div.progress div.bar")
+		$(timerStatsDivId + " tr." + style + " td.progressBar div.progress div.progress-bar")
 			.css("width", calculatePercentage(durationData[style], max) + "%");
 	}
 
@@ -437,7 +437,7 @@
 
 	function addMeterRow(type, className) {
 		return "<tr class='" + className + "'><td class='progressLabel'>" + type + "</td>"
-			+ "<td class='progressBar'><div class='progress'><div class='bar' style='width: 0%;'></div>"
+			+ "<td class='progressBar'><div class='progress'><div class='progress-bar' style='width: 0%;'></div>"
 			+ "</div></td><td class='progressValue'>0</td></tr>";
 	}
 
@@ -481,7 +481,7 @@
 
 	function setMeterRow(meterInfo, meterData, rowType, rowStyle) {
 		$("#" + meterInfo.divId + " tr." + rowStyle + " td.progressValue").html(formatNumber(meterData[rowType]));
-		$("#" + meterInfo.divId + " tr." + rowStyle + " td.progressBar div.progress div.bar")
+		$("#" + meterInfo.divId + " tr." + rowStyle + " td.progressBar div.progress div.progress-bar")
 			.css("width", calculatePercentage(meterData[rowType], meterInfo.max) + "%");
 	}
 
@@ -535,12 +535,12 @@
 	function drawCache(cacheInfo) {
 		var parentDiv = $("#" + cacheInfo.divId);
 
-		var html = "<div class='metricsWatcher cache cacheGraph span12'>"
+		var html = "<div class='metricsWatcher cache cacheGraph col-md-12'>"
 				+ "<fieldset><legend><h1>" + cacheInfo.title + "</h1></legend>"
-				+ "<div class='cacheContainer span12'>"
-				+ "	<div class='row-fluid'>"
-				+ "		<div class='span3'><div id='" + cacheInfo.divId + "Statistics'></div></div>"
-				+ "		<div class='span9'>"
+				+ "<div class='cacheContainer col-md-12'>"
+				+ "	<div class='row'>"
+				+ "		<div class='col-md-3'><div id='" + cacheInfo.divId + "Statistics'></div></div>"
+				+ "		<div class='col-md-9'>"
 				+ "			<div id='" + cacheInfo.divId + "gettimer'></div>"
 				+ "			<div id='" + cacheInfo.divId + "puttimer'></div>"
 				+ "		</div>"
@@ -576,9 +576,9 @@
 	 */
 	function drawJvm(jvmInfo) {
 		var parentDiv = $("#" + jvmInfo.divId);
-		var html = "<div class='metricsWatcher jvm metricGraph span12'>"
+		var html = "<div class='metricsWatcher jvm metricGraph col-md-12'>"
 				+ "<fieldset><legend><h1>" + jvmInfo.title + "</h1></legend>"
-				+ "<div class='jvmContainer span12'>"
+				+ "<div class='jvmContainer col-md-12'>"
 				+ "	<div id='" + jvmInfo.divId + "Vm'></div>"
 				+ "</div>"
 				+ "</fieldset></div>";
@@ -588,8 +588,8 @@
 	function updateJvm(jvmInfo, json) {
 		var vmDiv = $("#" + jvmInfo.divId + "Vm");
 		var jvm = json[jvmInfo.className];
-		var html = "<div class='row-fluid'>"
-				+ "<div class='span3'><table class='jvmTable'>"
+		var html = "<div class='row'>"
+				+ "<div class='col-md-3'><table class='jvmTable'>"
 				+ "<tr><td class='rowName'><h5>Name</h5></td><td>" + jvm.vm.name + "</td></tr>"
 				+ "<tr><td><h5>Version</h5></td><td>" + jvm.vm.version + "</td></tr>"
 				+ "<tr><td><h5>Current Time</h5></td><td>" + jvm.current_time + "</td></tr>"
@@ -598,7 +598,7 @@
 				+ "<tr><td><h5>Daemon Threads</h5></td><td>" + jvm.daemon_thread_count + "</td></tr>"
 				+ "<tr><td><h5>Threads</h5></td><td>" + jvm.thread_count + "</td></tr>"
 				+ "</table></div>"
-				+ "<div class='span3'><table class='jvmTable'>"
+				+ "<div class='col-md-3'><table class='jvmTable'>"
 				+ "<tr><td><h5>Total Init</h5></td><td>" + jvm.memory.totalInit + "</td></tr>"
 				+ "<tr><td><h5>Total Used</h5></td><td>" + jvm.memory.totalUsed + "</td></tr>"
 				+ "<tr><td><h5>Total Max</h5></td><td>" + jvm.memory.totalMax + "</td></tr>"
@@ -610,7 +610,7 @@
 				+ "<tr><td><h5>Heap Usage</h5></td><td>" + formatNumber(jvm.memory.heap_usage, 2) + "</td></tr>"
 				+ "<tr><td><h5>Non Heap Usage</h5></td><td>" + formatNumber(jvm.memory.non_heap_usage, 2) + "</td></tr>"
 				+ "</table></div>"
-				+ "<div class='span3'><table class='jvmTable'>"
+				+ "<div class='col-md-3'><table class='jvmTable'>"
 				+ "<tr><td><h5>Code Cache</h5></td><td>" + formatNumber(jvm.memory.memory_pool_usages['Code Cache'], 2) + "</td></tr>"
 				+ "<tr><td><h5>PS Eden Space</h5></td><td>" + formatNumber(jvm.memory.memory_pool_usages['PS Eden Space'], 2) + "</td></tr>"
 				+ "<tr><td><h5>PS Old Gen</h5></td><td>" + formatNumber(jvm.memory.memory_pool_usages['PS Old Gen'], 2) + "</td></tr>"
@@ -621,7 +621,7 @@
 				+ "<tr><td><h5>PS Scavenge Runs</h5></td><td>" + jvm['garbage-collectors']['PS Scavenge'].runs + "</td></tr>"
 				+ "<tr><td><h5>PS Scavenge Time</h5></td><td>" + jvm['garbage-collectors']['PS Scavenge'].time + "</td></tr>"
 				+ "</table></div>"
-				+ "<div class='span3'><table class='jvmTable'>"
+				+ "<div class='col-md-3'><table class='jvmTable'>"
 				+ "<tr><td><h5>Terminated</h5></td><td>" + jvm['thread-states'].terminated + "</td></tr>"
 				+ "<tr><td><h5>Timed Waiting</h5></td><td>" + formatNumber(jvm['thread-states'].timed_waiting, 2) + "</td></tr>"
 				+ "<tr><td><h5>Blocked</h5></td><td>" + formatNumber(jvm['thread-states'].blocked, 2) + "</td></tr>"
@@ -638,22 +638,22 @@
 	 */
 	function drawWeb(webInfo) {
 		var parentDiv = $("#" + webInfo.divId);
-		var html = "<div class='metricsWatcher web metricGraph span12'>"
+		var html = "<div class='metricsWatcher web metricGraph col-md-12'>"
 				+ "<fieldset><legend><h1>" + webInfo.title + "</h1></legend>"
-				+ "<div class='webContainer span12'>"
+				+ "<div class='webContainer col-md-12'>"
 				+ "	<div id='" + webInfo.divId + "Web'></div>"
 				+ "<table><tr>"
-				+ "<td colspan='4' class='requestsGraph span12'></td>"
+				+ "<td colspan='4' class='requestsGraph col-md-12'></td>"
 				+ "</tr><tr>"
-				+ "<td class='activeRequestsGraph span3'></td>"
-				+ "<td class='responseCodesOkGraph span3'></td>"
-				+ "<td class='responseCodesCreatedGraph span3'></td>"
-				+ "<td class='responseCodesOtherGraph span3'></td>"
+				+ "<td class='activeRequestsGraph col-md-3'></td>"
+				+ "<td class='responseCodesOkGraph col-md-3'></td>"
+				+ "<td class='responseCodesCreatedGraph col-md-3'></td>"
+				+ "<td class='responseCodesOtherGraph col-md-3'></td>"
 				+ "</tr><tr>"
-				+ "<td class='responseCodesBadRequestGraph span3'></td>"
-				+ "<td class='responseCodesNoContentGraph span3'></td>"
-				+ "<td class='responseCodesNotFoundGraph span3'></td>"
-				+ "<td class='responseCodesServerErrorGraph span3'></td>"
+				+ "<td class='responseCodesBadRequestGraph col-md-3'></td>"
+				+ "<td class='responseCodesNoContentGraph col-md-3'></td>"
+				+ "<td class='responseCodesNotFoundGraph col-md-3'></td>"
+				+ "<td class='responseCodesServerErrorGraph col-md-3'></td>"
 				+ "</tr></table>"
 				+ "</div>"
 				+ "</fieldset></div>";
@@ -683,21 +683,21 @@
 	 */
 	function drawLog4j(log4jInfo) {
 		var parentDiv = $("#" + log4jInfo.divId);
-		var html = "<div class='metricsWatcher log4j metricGraph span12'>"
+		var html = "<div class='metricsWatcher log4j metricGraph col-md-12'>"
 				+ "<fieldset><legend><h1>" + log4jInfo.title + "</h1></legend>"
-				+ "<div class='log4jContainer span12'>"
+				+ "<div class='log4jContainer col-md-12'>"
 				+ "	<div id='" + log4jInfo.divId + "Log4j'></div>"
 				+ "<table><tr>"
-				+ "<td colspan='4' class='span12'></td>"
+				+ "<td colspan='4' class='col-md-12'></td>"
 				+ "</tr><tr>"
-				+ "<td class='all span3'></td>"
-				+ "<td class='fatal span3'></td>"
-				+ "<td class='error span3'></td>"
-				+ "<td class='warn span3'></td>"
+				+ "<td class='all col-md-3'></td>"
+				+ "<td class='fatal col-md-3'></td>"
+				+ "<td class='error col-md-3'></td>"
+				+ "<td class='warn col-md-3'></td>"
 				+ "</tr><tr>"
-				+ "<td class='info span3'></td>"
-				+ "<td class='debug span3'></td>"
-				+ "<td class='trace span3'></td>"
+				+ "<td class='info col-md-3'></td>"
+				+ "<td class='debug col-md-3'></td>"
+				+ "<td class='trace col-md-3'></td>"
 				+ "</tr></table>"
 				+ "</div>"
 				+ "</fieldset></div>";
