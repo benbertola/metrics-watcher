@@ -64,6 +64,7 @@
 
 .metricsWatcher.timer table,
 .metricsWatcher.web table,
+.metricsWatcher.log4j table,
 .metricsWatcher.cache table,
 .metricsWatcher.jvm table,
 .metricsWatcher .progressBar,
@@ -76,6 +77,7 @@
 
 .metricsWatcher.jvm .jvmContainer,
 .metricsWatcher.web .webContainer,
+.metricsWatcher.log4j .log4jContainer,
 .metricsWatcher.cache .cacheContainer,
 .metricsWatcher.timer .timerContainer,
 .metricsWatcher.cache .gaugeTableContainer {
