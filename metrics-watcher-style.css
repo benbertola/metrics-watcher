@@ -50,7 +50,7 @@
 .metricsWatcher .progressLabel,
 .metricsWatcher .progressValue {
 	vertical-align: top;
-	padding: 0 5px;
+	padding: 0px 5px;
 }
 .metricsWatcher .progressValue {
 	font-size: 13px;
@@ -103,4 +103,8 @@
 .metricsWatcher table.jvmTable td {
 	font-size: 14px;
 	text-align: right;
+}
+
+caption{
+	font-weight: bold;
 }

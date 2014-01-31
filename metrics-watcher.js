@@ -22,9 +22,9 @@
 	 * @param title The user-displayed title of this graph
 	 */
 	metricsWatcher.addGauge = function(divId, className, metricName, title) {
-		var metricInfo = new MetricInfo(divId, className, metricName, null, title, 'gauge');
+		var metricInfo = new MetricInfo(divId, className, metricName, null, title, 'gauges');
 		graphs.push(metricInfo);
-	}
+	};
 
 	/**
 	 * Add a Meter type graph to your page.
@@ -37,10 +37,10 @@
 	 */
 	metricsWatcher.addMeter = function(divId, className, metricName, max, title, eventType) {
 		if (eventType == undefined) eventType = 'Calls';
-		var metricInfo = new MetricInfo(divId, className, metricName, max, title, 'meter');
+		var metricInfo = new MetricInfo(divId, className, metricName, max, title, 'meters');
 		metricInfo.eventType = eventType;
 		graphs.push(metricInfo);
-	}
+	};
 
 	/**
 	 * Add a Counter graph
@@ -52,9 +52,9 @@
 	 * @param title The user-displayed title of this graph
 	 */
 	metricsWatcher.addCounter = function(divId, className, metricName, max, title) {
-		var metricInfo = new MetricInfo(divId, className, metricName, max, title, 'counter');
+		var metricInfo = new MetricInfo(divId, className, metricName, max, title, 'counters');
 		graphs.push(metricInfo);
-	}
+	};
 
 	/**
 	 * Add a linked Counter graph. Linked Counters differ from a plain counter graph in that both the numerator and denominator
@@ -68,7 +68,7 @@
 	 * @param title The user-displayed title of this graph
 	 */
 	metricsWatcher.addLinkedCounter = function(divId, className, metricName, maxClassName, maxMetricName, title) {
-		var metricInfo = new MetricInfo(divId, className, metricName, null, title, "counter");
+		var metricInfo = new MetricInfo(divId, className, metricName, null, title, "counters");
 		metricInfo.maxClassName = maxClassName;
 		metricInfo.maxMetricName = maxMetricName;
 
@@ -77,7 +77,7 @@
 			return maxNode["count"];
 		};
 		graphs.push(metricInfo);
-	}
+	};
 
 	/**
 	 * Add a Timer graph. This will include a Meter, Timing Info, and a Histogram.
@@ -93,7 +93,7 @@
 	metricsWatcher.addTimer = function(divId, className, metricName, max, title, eventType, durationMax) {
 		var timer = addTimerInternal(divId, className, metricName, max, title, eventType, durationMax, false);
 		graphs.push(timer);
-	}
+	};
 
 	/**
 	 * Add an ehcache graph.
@@ -103,35 +103,35 @@
 	 * @param title The user-displayed title of this graph
 	 */
 	metricsWatcher.addCache = function(divId, className, title) {
-		var metricInfo = new MetricInfo(divId, className, null, null, title, "cache");
+		var metricInfo = new MetricInfo(divId, className, null, null, title, "caches");
 
 		metricInfo.components = {
 			gauges : [
-				new MetricInfo(null, className, "hits", null, "Hits", "gauge"),
-				new MetricInfo(null, className, "misses", null, "Misses", "gauge"),
-				new MetricInfo(null, className, "objects", null, "Objects", "gauge"),
-				new MetricInfo(null, className, "eviction-count", null, "Eviction Count", "gauge"),
-				new MetricInfo(null, className, "in-memory-hits", null, "In Memory Hits", "gauge"),
-				new MetricInfo(null, className, "in-memory-misses", null, "In Memory Misses", "gauge"),
-				new MetricInfo(null, className, "in-memory-objects", null, "In Memory Objects", "gauge"),
-				new MetricInfo(null, className, "off-heap-hits", null, "Off Heap Hits", "gauge"),
-				new MetricInfo(null, className, "off-heap-misses", null, "Off Heap Misses", "gauge"),
-				new MetricInfo(null, className, "off-heap-objects", null, "Off Heap Objects", "gauge"),
-				new MetricInfo(null, className, "on-disk-hits", null, "On Disk Hits", "gauge"),
-				new MetricInfo(null, className, "on-disk-misses", null, "On Disk Misses", "gauge"),
-				new MetricInfo(null, className, "on-disk-objects", null, "On Disk Objects", "gauge"),
-				new MetricInfo(null, className, "mean-get-time", null, "Mean Get Time", "gauge"),
-				new MetricInfo(null, className, "mean-search-time", null, "Mean Search Time", "gauge"),
-				new MetricInfo(null, className, "searches-per-second", null, "Searches Per Sec", "gauge"),
-				new MetricInfo(null, className, "writer-queue-size", null, "Writer Queue Size", "gauge"),
-				new MetricInfo(null, className, "accuracy", null, "Accuracy", "gauge")
+				new MetricInfo(null, className, "hits", null, "Hits", "gauges"),
+				new MetricInfo(null, className, "misses", null, "Misses", "gauges"),
+				new MetricInfo(null, className, "objects", null, "Objects", "gauges"),
+				new MetricInfo(null, className, "eviction-count", null, "Eviction Count", "gauges"),
+				new MetricInfo(null, className, "in-memory-hits", null, "In Memory Hits", "gauges"),
+				new MetricInfo(null, className, "in-memory-misses", null, "In Memory Misses", "gauges"),
+				new MetricInfo(null, className, "in-memory-objects", null, "In Memory Objects", "gauges"),
+				new MetricInfo(null, className, "off-heap-hits", null, "Off Heap Hits", "gauges"),
+				new MetricInfo(null, className, "off-heap-misses", null, "Off Heap Misses", "gauges"),
+				new MetricInfo(null, className, "off-heap-objects", null, "Off Heap Objects", "gauges"),
+				new MetricInfo(null, className, "on-disk-hits", null, "On Disk Hits", "gauges"),
+				new MetricInfo(null, className, "on-disk-misses", null, "On Disk Misses", "gauges"),
+				new MetricInfo(null, className, "on-disk-objects", null, "On Disk Objects", "gauges"),
+				new MetricInfo(null, className, "mean-get-time", null, "Mean Get Time", "gauges"),
+				new MetricInfo(null, className, "mean-search-time", null, "Mean Search Time", "gauges"),
+				new MetricInfo(null, className, "searches-per-second", null, "Searches Per Sec", "gauges"),
+				new MetricInfo(null, className, "writer-queue-size", null, "Writer Queue Size", "gauges"),
+				new MetricInfo(null, className, "accuracy", null, "Accuracy", "gauges")
 			]
 		};
-		metricInfo.getTimer = addTimerInternal(divId + "gettimer", className, "get", 1000, "Get", "get", 1000, true);
-		metricInfo.putTimer = addTimerInternal(divId + "puttimer", className, "put", 1000, "Put", "put", 10000, true);
+		metricInfo.getTimer = addTimerInternal(divId + "gettimer", className, "gets", 5, "Get", "get", 1, true);
+		metricInfo.putTimer = addTimerInternal(divId + "puttimer", className, "puts", 5, "Put", "put", 1, true);
 
 		graphs.push(metricInfo);
-	}
+	};
 
 	/**
 	 * Add a JVM graph.
@@ -141,9 +141,9 @@
 	 * @param title The user-displayed title of this graph
 	 */
 	metricsWatcher.addJvm = function(divId, className, title) {
-		var metricInfo = new MetricInfo(divId, className, null, null, title, "jvm");
+		var metricInfo = new MetricInfo(divId, className, null, null, title, "jvms");
 		graphs.push(metricInfo);
-	}
+	};
 
 	/**
 	 * Add a web server graph.
@@ -153,24 +153,24 @@
 	 * @param title The user-displayed title of this graph
 	 */
 	metricsWatcher.addWeb = function(divId, className, title) {
-		var metricInfo = new MetricInfo(divId, className, null, null, title, "web");
+		var metricInfo = new MetricInfo(divId, className, null, null, title, "webs");
 
 		metricInfo.components = {
 			meters : [
-				new MetricInfo(divId + " td.responseCodesOkGraph", className, "responseCodes.ok", 10, "OK Responses", "meter"),
-				new MetricInfo(divId + " td.responseCodesBadRequestGraph", className, "responseCodes.badRequest", 10, "Bad Requests", "meter"),
-				new MetricInfo(divId + " td.responseCodesCreatedGraph", className, "responseCodes.created", 10, "Created Responses", "meter"),
-				new MetricInfo(divId + " td.responseCodesNoContentGraph", className, "responseCodes.noContent", 10, "No Content Responses", "meter"),
-				new MetricInfo(divId + " td.responseCodesNotFoundGraph", className, "responseCodes.notFound", 10, "Not Found Responses", "meter"),
-				new MetricInfo(divId + " td.responseCodesOtherGraph", className, "responseCodes.other", 10, "Other Responses", "meter"),
-				new MetricInfo(divId + " td.responseCodesServerErrorGraph", className, "responseCodes.serverError", 10, "Server Error Responses", "meter")
+				new MetricInfo(divId + " td.responseCodesOkGraph", className, "responseCodes.ok", 10, "OK Responses", "meters"),
+				new MetricInfo(divId + " td.responseCodesBadRequestGraph", className, "responseCodes.badRequest", 10, "Bad Requests", "meters"),
+				new MetricInfo(divId + " td.responseCodesCreatedGraph", className, "responseCodes.created", 10, "Created Responses", "meters"),
+				new MetricInfo(divId + " td.responseCodesNoContentGraph", className, "responseCodes.noContent", 10, "No Content Responses", "meters"),
+				new MetricInfo(divId + " td.responseCodesNotFoundGraph", className, "responseCodes.notFound", 10, "Not Found Responses", "meters"),
+				new MetricInfo(divId + " td.responseCodesOtherGraph", className, "responseCodes.other", 10, "Other Responses", "meters"),
+				new MetricInfo(divId + " td.responseCodesServerErrorGraph", className, "responseCodes.serverError", 10, "Server Error Responses", "meters")
 			],
-			activeRequestsInfo : new MetricInfo(divId + " td.activeRequestsGraph", className, "activeRequests", 10, "Active Requests", "counter"),
+			activeRequestsInfo : new MetricInfo(divId + " td.activeRequestsGraph", className, "activeRequests", 10, "Active Requests", "counters"),
 			requestsInfo : addTimerInternal(divId + " td.requestsGraph", className, "requests", 100, "Requests", "requests", 100, true)
 		};
 
 		graphs.push(metricInfo);
-	}
+	};
 
 	/**
 	 * Add a log4j logged events graph.
@@ -180,23 +180,23 @@
 	 * @param title The user-displayed title of this graph
 	 */
 	metricsWatcher.addLog4j = function(divId, className, title) {
-		var metricInfo = new MetricInfo(divId, className, null, null, title, "log4j");
+		var metricInfo = new MetricInfo(divId, className, null, null, title, "log4js");
 
 		metricInfo.components = {
 			meters : [
-				new MetricInfo(divId + " td.all", className, "all", 100, "all", "meter"),
-				new MetricInfo(divId + " td.fatal", className, "fatal", 100, "fatal", "meter"),
-				new MetricInfo(divId + " td.error", className, "error", 100, "error", "meter"),
-				new MetricInfo(divId + " td.warn", className, "warn", 100, "warn", "meter"),
-				new MetricInfo(divId + " td.info", className, "info", 100, "info", "meter"),
-				new MetricInfo(divId + " td.debug", className, "debug", 100, "debug", "meter"),
-				new MetricInfo(divId + " td.trace", className, "trace", 100, "trace", "meter")
+				new MetricInfo(divId + " td.all", className, "all", 100, "all", "meters"),
+				new MetricInfo(divId + " td.fatal", className, "fatal", 100, "fatal", "meters"),
+				new MetricInfo(divId + " td.error", className, "error", 100, "error", "meters"),
+				new MetricInfo(divId + " td.warn", className, "warn", 100, "warn", "meters"),
+				new MetricInfo(divId + " td.info", className, "info", 100, "info", "meters"),
+				new MetricInfo(divId + " td.debug", className, "debug", 100, "debug", "meters"),
+				new MetricInfo(divId + " td.trace", className, "trace", 100, "trace", "meters")
 			]
 		};
 
 		graphs.push(metricInfo);
-	}
-    
+	};
+
 	/**
 	 * Initialized each of the graphs that you have added through addXXX() calls,
 	 * and draws them on the screen for the first time
@@ -204,26 +204,26 @@
 	metricsWatcher.initGraphs = function() {
 		// draw all graphs for the first time
 		for (var i = 0; i < graphs.length; i++) {
-			if (graphs[i].type == "gauge")
+			if (graphs[i].type == "gauges")
 				drawGauge(graphs[i]);
-			else if (graphs[i].type == "meter")
+			else if (graphs[i].type == "meters")
 				drawMeter(graphs[i]);
-			else if (graphs[i].type == "counter")
+			else if (graphs[i].type == "counters")
 				drawCounter(graphs[i]);
-			else if (graphs[i].type == "timer")
+			else if (graphs[i].type == "timers")
 				drawTimer(graphs[i]);
-			else if (graphs[i].type == "cache")
+			else if (graphs[i].type == "caches")
 				drawCache(graphs[i]);
-			else if (graphs[i].type == "jvm")
+			else if (graphs[i].type == "jvms")
 				drawJvm(graphs[i]);
-			else if (graphs[i].type == "web")
+			else if (graphs[i].type == "webs")
 				drawWeb(graphs[i]);
-			else if (graphs[i].type == "log4j")
+			else if (graphs[i].type == "log4js")
 				drawLog4j(graphs[i]);
 			else
 				alert("Unknown meter info type: " + graphs[i].type);
 		}
-	}
+	};
 
 	/**
 	 * Update the existing graphs with new data. You can call this method as frequently as you would
@@ -233,26 +233,26 @@
 	 */
 	metricsWatcher.updateGraphs = function(json) {
 		for (var i = 0; i < graphs.length; i++) {
-			if (graphs[i].type == "gauge")
+			if (graphs[i].type == "gauges")
 				updateGauge(graphs[i], json);
-			else if (graphs[i].type == "meter")
+			else if (graphs[i].type == "meters")
 				updateMeter(graphs[i], json);
-			else if (graphs[i].type == "counter")
+			else if (graphs[i].type == "counters")
 				updateCounter(graphs[i], json);
-			else if (graphs[i].type == "timer")
+			else if (graphs[i].type == "timers")
 				updateTimer(graphs[i], json);
-			else if (graphs[i].type == "cache")
+			else if (graphs[i].type == "caches")
 				updateCache(graphs[i], json);
-			else if (graphs[i].type == "jvm")
+			else if (graphs[i].type == "jvms")
 				updateJvm(graphs[i], json);
-			else if (graphs[i].type == "web")
+			else if (graphs[i].type == "webs")
 				updateWeb(graphs[i], json);
-			else if (graphs[i].type == "log4j")
+			else if (graphs[i].type == "log4js")
 				updateLog4j(graphs[i], json);
 			else
 				alert("Unknown meter info type: " + graphs[i].type);
 		}
-	}
+	};
 
 	/*
 	 * Private Methods
@@ -271,7 +271,7 @@
 			return this.max;
 		};
 		this.getMetricNode = function getMetricNode(className, metricName, jsonRoot) {
-			return !jsonRoot[className] ? null : jsonRoot[className][metricName];
+			return !(jsonRoot[type][className+'.'+metricName]) ? null : jsonRoot[type][className+'.'+metricName];
 		};
 	}
 
@@ -282,7 +282,8 @@
 
 	function formatNumber(varNumber, n) {
 		if (!n) n = 1;
-		return varNumber.toFixed(n);
+
+		return !isNaN(varNumber)?varNumber.toFixed(n):n;
 	}
 
 	function capitalizeFirstLetter(input) {
@@ -290,14 +291,14 @@
 	}
 
 	function addTimerInternal(divId, className, metricName, max, title, eventType, durationMax, isNested) {
-		var metricInfo = new MetricInfo(divId, className, metricName, max, title, 'timer');
+		var metricInfo = new MetricInfo(divId, className, metricName, max, title, 'timers');
 
 		metricInfo.getMeterInfo = function() {
 			var myDivId = this.divId + " div.timerGraph td.meterGraph";
-			var retVal = new MetricInfo(myDivId, this.className, this.metricName, this.max, "Frequency", 'meter');
+			var retVal = new MetricInfo(myDivId, this.className, this.metricName, this.max, "Frequency", 'timers');
 
 			retVal.getMetricNode = function(className, metricName, jsonRoot) {
-				return !jsonRoot[className] ? null : jsonRoot[className][metricName]["rate"];
+				return !jsonRoot['timers'][className+'.'+metricName] ? null : jsonRoot['timers'][className+'.'+metricName];
 			};
 
 			retVal.eventType = eventType;
@@ -342,8 +343,10 @@
 
 		var nested = (timerInfo.isNested) ? " nested" : "";
 		var html = "<div class='metricsWatcher timer timerGraph" + nested + " col-md-12'>"
-				+ "<fieldset><legend><h1>" + timerInfo.title + "</h1></legend>"
-				+ "<div class='timerContainer col-md-12'>"
+				+ "<fieldset><legend>"
+				+ ((timerInfo.isNested) ? "<h1>":"<h1 class='btn-link' data-toggle='collapse' data-target='#" + timerInfo.divId + "Collapse'>") 
+				+ timerInfo.title + "</h1></legend>"
+				+ "<div class='timerContainer col-md-12" + ((timerInfo.isNested) ? "": "collapse") +"' id='" + timerInfo.divId +"Collapse'>"
 				+ "<table><tr>"
 				+ "<td class='meterGraph col-md-4'></td>"
 				+ "<td class='timerStatsGraph col-md-4'></td>"
@@ -360,9 +363,8 @@
 		var html = "<h3>Duration</h3><p></p><div class='metricGraph'><table class='progressTable'>"
 			+ addMeterRow("Min", "min")
 			+ addMeterRow("Mean", "mean")
-			+ addMeterRow("Median", "median")
 			+ addMeterRow("Max", "max")
-			+ addMeterRow("Std&nbsp;Dev", "std_dev")
+			+ addMeterRow("Std&nbsp;Dev", "stddev")
 			+ "</table></div>";
 		var parentDiv = $(timerInfo.getTimerStatsDivId());
 		parentDiv.html(html);
@@ -375,6 +377,7 @@
 			+ addMeterRow("98%", "p98")
 			+ addMeterRow("95%", "p95")
 			+ addMeterRow("75%", "p75")
+			+ addMeterRow("50%", "p50")
 			+ "</table></div>";
 		var parentDiv = $(timerInfo.getTimerHistogramDivId());
 		parentDiv.html(html);
@@ -389,16 +392,14 @@
 	function updateDurationStats(timerInfo, json) {
 		var metricNode = timerInfo.getMetricNode(timerInfo.className, timerInfo.metricName, json);
 		if (!metricNode) return;
-		var metricData = metricNode["duration"];
 
 		var timeUnitDiv = $(timerInfo.getTimerStatsDivId() + " p");
-		timeUnitDiv.html(capitalizeFirstLetter(metricData["unit"]));
+		timeUnitDiv.html(capitalizeFirstLetter(metricNode["duration_units"]));
 
-		updateDuration(timerInfo.getTimerStatsDivId(), metricData, "min", timerInfo.durationMax);
-		updateDuration(timerInfo.getTimerStatsDivId(), metricData, "mean", timerInfo.durationMax);
-		updateDuration(timerInfo.getTimerStatsDivId(), metricData, "median", timerInfo.durationMax);
-		updateDuration(timerInfo.getTimerStatsDivId(), metricData, "max", timerInfo.durationMax);
-		updateDuration(timerInfo.getTimerStatsDivId(), metricData, "std_dev", timerInfo.durationMax);
+		updateDuration(timerInfo.getTimerStatsDivId(), metricNode, "min", timerInfo.durationMax);
+		updateDuration(timerInfo.getTimerStatsDivId(), metricNode, "mean", timerInfo.durationMax);
+		updateDuration(timerInfo.getTimerStatsDivId(), metricNode, "max", timerInfo.durationMax);
+		updateDuration(timerInfo.getTimerStatsDivId(), metricNode, "stddev", timerInfo.durationMax);
 	}
 
 	function updateDuration(timerStatsDivId, durationData, style, max) {
@@ -410,13 +411,13 @@
 	function updateDurationHistogram(timerInfo, json) {
 		var metricNode = timerInfo.getMetricNode(timerInfo.className, timerInfo.metricName, json);
 		if (!metricNode) return;
-		var metricData = metricNode["duration"];
 
-		updateDuration(timerInfo.getTimerHistogramDivId(), metricData, "p999", timerInfo.durationMax);
-		updateDuration(timerInfo.getTimerHistogramDivId(), metricData, "p99", timerInfo.durationMax);
-		updateDuration(timerInfo.getTimerHistogramDivId(), metricData, "p98", timerInfo.durationMax);
-		updateDuration(timerInfo.getTimerHistogramDivId(), metricData, "p95", timerInfo.durationMax);
-		updateDuration(timerInfo.getTimerHistogramDivId(), metricData, "p75", timerInfo.durationMax);
+		updateDuration(timerInfo.getTimerHistogramDivId(), metricNode, "p999", timerInfo.durationMax);
+		updateDuration(timerInfo.getTimerHistogramDivId(), metricNode, "p99", timerInfo.durationMax);
+		updateDuration(timerInfo.getTimerHistogramDivId(), metricNode, "p98", timerInfo.durationMax);
+		updateDuration(timerInfo.getTimerHistogramDivId(), metricNode, "p95", timerInfo.durationMax);
+		updateDuration(timerInfo.getTimerHistogramDivId(), metricNode, "p75", timerInfo.durationMax);
+		updateDuration(timerInfo.getTimerHistogramDivId(), metricNode, "p50", timerInfo.durationMax);
 	}
 
 	/*
@@ -452,37 +453,25 @@
 		// set the big counter
 		var gaugeDiv = $("#" + meterInfo.divId + " p");
 
-		// the type per unit
-		var eventType = meterInfo.eventType;
-		if (!eventType) {
-			eventType = meterData["event_type"];
-		}
+		gaugeDiv.html( (!(meterData.rate_units)?meterData.units: meterData.rate_units) + " (" + meterData.count + " total)");
 
-		// some naive pluralization rules, can get more fancy if needed
-		if (meterData.count > 1 && eventType === "get") {
-			eventType = "gets";
-		} else if (meterData.count > 1 && eventType === "put") {
-			eventType = "puts";
-		}
-
-		var unit = meterData.unit;
-		if (unit === "seconds") {
-			unit = "second";
-		}
-
-		gaugeDiv.html(eventType + " per " + unit + " (" + meterData.count + " total)");
+		var maxRate = Math.max(meterData['mean_rate'],meterData['m1_rate'],meterData['m5_rate'],meterData['m15_rate']);
 
 		// set the mean count
-		setMeterRow(meterInfo, meterData, "mean", "mean");
-		setMeterRow(meterInfo, meterData, "m1", "onemin");
-		setMeterRow(meterInfo, meterData, "m5", "fivemin");
-		setMeterRow(meterInfo, meterData, "m15", "fifteenmin");
+		setMeterRow(meterInfo, meterData, "mean_rate", "mean", maxRate);
+		setMeterRow(meterInfo, meterData, "m1_rate", "onemin", maxRate);
+		setMeterRow(meterInfo, meterData, "m5_rate", "fivemin", maxRate);
+		setMeterRow(meterInfo, meterData, "m15_rate", "fifteenmin", maxRate);
 	}
 
 	function setMeterRow(meterInfo, meterData, rowType, rowStyle) {
+		setMeterRow(meterInfo, meterData, rowType, rowStyle, meterInfo.max);
+	}
+
+	function setMeterRow(meterInfo, meterData, rowType, rowStyle, max) {
 		$("#" + meterInfo.divId + " tr." + rowStyle + " td.progressValue").html(formatNumber(meterData[rowType]));
 		$("#" + meterInfo.divId + " tr." + rowStyle + " td.progressBar div.progress div.progress-bar")
-			.css("width", calculatePercentage(meterData[rowType], meterInfo.max) + "%");
+			.css("width", calculatePercentage(meterData[rowType], max) + "%");
 	}
 
 	/*
@@ -536,8 +525,8 @@
 		var parentDiv = $("#" + cacheInfo.divId);
 
 		var html = "<div class='metricsWatcher cache cacheGraph col-md-12'>"
-				+ "<fieldset><legend><h1>" + cacheInfo.title + "</h1></legend>"
-				+ "<div class='cacheContainer col-md-12'>"
+				+ "<fieldset><legend><h1 class='btn-link' data-toggle='collapse' data-target='#" + cacheInfo.divId + "'>" + cacheInfo.title + "</h1></legend>"
+				+ "<div class='cacheContainer col-md-12 collapse in' id='" + cacheInfo.divId + "'>"
 				+ "	<div class='row'>"
 				+ "		<div class='col-md-3'><div id='" + cacheInfo.divId + "Statistics'></div></div>"
 				+ "		<div class='col-md-9'>"
@@ -577,8 +566,8 @@
 	function drawJvm(jvmInfo) {
 		var parentDiv = $("#" + jvmInfo.divId);
 		var html = "<div class='metricsWatcher jvm metricGraph col-md-12'>"
-				+ "<fieldset><legend><h1>" + jvmInfo.title + "</h1></legend>"
-				+ "<div class='jvmContainer col-md-12'>"
+				+ "<fieldset><legend><h1 class='btn-link' data-toggle='collapse' data-target='#" +jvmInfo.divId + "Collapse'>" + jvmInfo.title + "</h1></legend>"
+				+ "<div class='jvmContainer col-md-12 collapse in' id='" + jvmInfo.divId + "Collapse'>"
 				+ "	<div id='" + jvmInfo.divId + "Vm'></div>"
 				+ "</div>"
 				+ "</fieldset></div>";
@@ -587,47 +576,58 @@
 
 	function updateJvm(jvmInfo, json) {
 		var vmDiv = $("#" + jvmInfo.divId + "Vm");
-		var jvm = json[jvmInfo.className];
+		var jvm = json['gauges'];
 		var html = "<div class='row'>"
-				+ "<div class='col-md-3'><table class='jvmTable'>"
-				+ "<tr><td class='rowName'><h5>Name</h5></td><td>" + jvm.vm.name + "</td></tr>"
-				+ "<tr><td><h5>Version</h5></td><td>" + jvm.vm.version + "</td></tr>"
-				+ "<tr><td><h5>Current Time</h5></td><td>" + jvm.current_time + "</td></tr>"
-				+ "<tr><td><h5>Uptime</h5></td><td>" + jvm.uptime + "</td></tr>"
-				+ "<tr><td><h5>FD Usage</h5></td><td>" + formatNumber(jvm.fd_usage, 2) + "</td></tr>"
-				+ "<tr><td><h5>Daemon Threads</h5></td><td>" + jvm.daemon_thread_count + "</td></tr>"
-				+ "<tr><td><h5>Threads</h5></td><td>" + jvm.thread_count + "</td></tr>"
+				+ "<div class='col-md-3'><table class='jvmTable'><caption>Memory</caption>"
+				+ "<tr><td><h5>Total Init</h5></td><td>" + jvm['jvm.memory.total.init'].value + "</td></tr>"
+				+ "<tr><td><h5>Total Used</h5></td><td>" + jvm['jvm.memory.total.used'].value + "</td></tr>"
+				+ "<tr><td><h5>Total Max</h5></td><td>" + jvm['jvm.memory.total.max'].value + "</td></tr>"
+				+ "<tr><td><h5>Total Committed</h5></td><td>" + jvm['jvm.memory.total.committed'].value + "</td></tr>"
+				+ "<tr><td><h5>Heap Init</h5></td><td>" + jvm['jvm.memory.heap.init'].value + "</td></tr>"
+				+ "<tr><td><h5>Heap Used</h5></td><td>" + jvm['jvm.memory.heap.used'].value + "</td></tr>"
+				+ "<tr><td><h5>Heap Max</h5></td><td>" + jvm['jvm.memory.heap.max'].value + "</td></tr>"
+				+ "<tr><td><h5>Heap Committed</h5></td><td>" + jvm['jvm.memory.heap.committed'].value + "</td></tr>"
+				+ "<tr><td><h5>Non Heap Init</h5></td><td>" + jvm['jvm.memory.non-heap.init'].value + "</td></tr>"
+				+ "<tr><td><h5>Non Heap Used</h5></td><td>" + jvm['jvm.memory.non-heap.used'].value + "</td></tr>"
+				+ "<tr><td><h5>Non Heap Max</h5></td><td>" + jvm['jvm.memory.non-heap.max'].value + "</td></tr>"
+				+ "<tr><td><h5>Non Heap Committed</h5></td><td>" + jvm['jvm.memory.non-heap.committed'].value + "</td></tr>"
 				+ "</table></div>"
-				+ "<div class='col-md-3'><table class='jvmTable'>"
-				+ "<tr><td><h5>Total Init</h5></td><td>" + jvm.memory.totalInit + "</td></tr>"
-				+ "<tr><td><h5>Total Used</h5></td><td>" + jvm.memory.totalUsed + "</td></tr>"
-				+ "<tr><td><h5>Total Max</h5></td><td>" + jvm.memory.totalMax + "</td></tr>"
-				+ "<tr><td><h5>Total Committed</h5></td><td>" + jvm.memory.totalCommitted + "</td></tr>"
-				+ "<tr><td><h5>Heap Init</h5></td><td>" + jvm.memory.heapInit + "</td></tr>"
-				+ "<tr><td><h5>Heap Used</h5></td><td>" + jvm.memory.heapUsed + "</td></tr>"
-				+ "<tr><td><h5>Heap Max</h5></td><td>" + jvm.memory.heapMax + "</td></tr>"
-				+ "<tr><td><h5>Heap Committed</h5></td><td>" + jvm.memory.heapCommitted + "</td></tr>"
-				+ "<tr><td><h5>Heap Usage</h5></td><td>" + formatNumber(jvm.memory.heap_usage, 2) + "</td></tr>"
-				+ "<tr><td><h5>Non Heap Usage</h5></td><td>" + formatNumber(jvm.memory.non_heap_usage, 2) + "</td></tr>"
+				+ "<div class='col-md-3'><table class='jvmTable'><caption>Memory Usage</caption>"
+				+ "<tr><td><h5>Heap Usage</h5></td><td>" + jvm['jvm.memory.heap.usage'].value.toFixed(4) * 100 + "</td></tr>"
+				+ "<tr><td><h5>Non Heap Usage</h5></td><td>" + jvm['jvm.memory.non-heap.usage'].value.toFixed(4) * 100 + "</td></tr>"
+				+ (!jvm['jvm.memory.pools.JIT-code-cache.usage']?"":("<tr><td><h5>JIT Code Cache Usage</h5></td><td>" + jvm['jvm.memory.pools.JIT-code-cache.usage'].value + "</td></tr>"))
+				+ (!jvm['jvm.memory.pools.Code-Cache.usage']?"":("<tr><td><h5>JIT Code Cache Usage</h5></td><td>" + jvm['jvm.memory.pools.Code-Cache.usage'].value.toFixed(4) * 100 + "</td></tr>"))
+				+ (!jvm['jvm.memory.pools.JIT-data-cache.usage']?"":("<tr><td><h5>JIT Data Cache Usage</h5></td><td>" + jvm['jvm.memory.pools.JIT-data-cache.usage'].value.toFixed(4) * 100 + "</td></tr>"))
+				+ (!jvm['jvm.memory.pools.Java-heap.usage']?"":("<tr><td><h5>Java Heap Usage</h5></td><td>" + jvm['jvm.memory.pools.Java-heap.usage'].value.toFixed(4) * 100 + "</td></tr>"))
+				+ (!jvm['jvm.memory.pools.class-storage.usage']?"":("<tr><td><h5>Class Storage Usage</h5></td><td>" + jvm['jvm.memory.pools.class-storage.usage'].value.toFixed(4) * 100 + "</td></tr>"))
+				+ (!jvm['jvm.memory.pools.Perm-Gen.usage']?"":("<tr><td><h5>Perm Gen Usage</h5></td><td>" + jvm['jvm.memory.pools.Perm-Gen.usage'].value.toFixed(4) * 100 + "</td></tr>"))
+				+ (!jvm['jvm.memory.pools.Tenured-Gen.usage']?"":("<tr><td><h5>Tenured Gen Usage</h5></td><td>" + jvm['jvm.memory.pools.Tenured-Gen.usage'].value.toFixed(4) * 100 + "</td></tr>"))
+				+ (!jvm['jvm.memory.pools.miscellaneous-non-heap-storage.usage']?"":("<tr><td><h5>Misc Non Heap Storage Usage</h5></td><td>" + jvm['jvm.memory.pools.miscellaneous-non-heap-storage.usage'].value.toFixed(4) * 100 + "</td></tr>"))
+				+ (!jvm['jvm.memory.pools.Survivor-Space.usage']?"":("<tr><td><h5>Survivor Space Usage</h5></td><td>" + jvm['jvm.memory.pools.Survivor-Space.usage'].value.toFixed(4) * 100 + "</td></tr>"))
+				+ (!jvm['jvm.memory.pools.Eden-Space.usage']?"":("<tr><td><h5>Eden Space Usage</h5></td><td>" + jvm['jvm.memory.pools.Eden-Space.usage'].value.toFixed(4) * 100 + "</td></tr>"))
+				+"</table></div>"
+				+ "<div class='col-md-3'><table class='jvmTable'><caption>Garbage Collection</caption>"
+				+ "<tr><td><h5>PS Mark Sweep Runs</h5></td><td>" + jvm['jvm.gc.MarkSweepCompact.count'].value + "</td></tr>"
+				+ "<tr><td><h5>PS Mark Sweep Time</h5></td><td>" + jvm['jvm.gc.MarkSweepCompact.time'].value + "</td></tr>"
+				+ "<tr><td><h5>GC Copy Runs</h5></td><td>" + jvm['jvm.gc.Copy.count'].value + "</td></tr>"
+				+ "<tr><td><h5>GC Copy Time</h5></td><td>" + jvm['jvm.gc.Copy.time'].value + "</td></tr>"
 				+ "</table></div>"
-				+ "<div class='col-md-3'><table class='jvmTable'>"
-				+ "<tr><td><h5>Code Cache</h5></td><td>" + formatNumber(jvm.memory.memory_pool_usages['Code Cache'], 2) + "</td></tr>"
-				+ "<tr><td><h5>PS Eden Space</h5></td><td>" + formatNumber(jvm.memory.memory_pool_usages['PS Eden Space'], 2) + "</td></tr>"
-				+ "<tr><td><h5>PS Old Gen</h5></td><td>" + formatNumber(jvm.memory.memory_pool_usages['PS Old Gen'], 2) + "</td></tr>"
-				+ "<tr><td><h5>PS Perm Gen</h5></td><td>" + formatNumber(jvm.memory.memory_pool_usages['PS Perm Gen'], 2) + "</td></tr>"
-				+ "<tr><td><h5>PS Survivor Space</h5></td><td>" + formatNumber(jvm.memory.memory_pool_usages['PS Survivor Space'], 2) + "</td></tr>"
-				+ "<tr><td><h5>PS Mark Sweep Runs</h5></td><td>" + jvm['garbage-collectors']['PS MarkSweep'].runs + "</td></tr>"
-				+ "<tr><td><h5>PS Mark Sweep Time</h5></td><td>" + jvm['garbage-collectors']['PS MarkSweep'].time + "</td></tr>"
-				+ "<tr><td><h5>PS Scavenge Runs</h5></td><td>" + jvm['garbage-collectors']['PS Scavenge'].runs + "</td></tr>"
-				+ "<tr><td><h5>PS Scavenge Time</h5></td><td>" + jvm['garbage-collectors']['PS Scavenge'].time + "</td></tr>"
-				+ "</table></div>"
-				+ "<div class='col-md-3'><table class='jvmTable'>"
-				+ "<tr><td><h5>Terminated</h5></td><td>" + jvm['thread-states'].terminated + "</td></tr>"
-				+ "<tr><td><h5>Timed Waiting</h5></td><td>" + formatNumber(jvm['thread-states'].timed_waiting, 2) + "</td></tr>"
-				+ "<tr><td><h5>Blocked</h5></td><td>" + formatNumber(jvm['thread-states'].blocked, 2) + "</td></tr>"
-				+ "<tr><td><h5>Waiting</h5></td><td>" + formatNumber(jvm['thread-states'].waiting, 2) + "</td></tr>"
-				+ "<tr><td><h5>Runnable</h5></td><td>" + formatNumber(jvm['thread-states'].runnable, 2) + "</td></tr>"
-				+ "<tr><td><h5>New</h5></td><td>" + jvm['thread-states']['new'] + "</td></tr>"
+				+ "<div class='col-md-3'><table class='jvmTable'><caption>Threads</caption>"
+//				+ "<tr><td class='rowName'><h5>Name</h5></td><td>" + jvm['jvm.vm.name'].value + "</td></tr>"
+//				+ "<tr><td><h5>Version</h5></td><td>" + jvm['jvm.vm.version'].value + "</td></tr>"
+//				+ "<tr><td><h5>Current Time</h5></td><td>" + jvm['jvm.current_time'].value + "</td></tr>"
+//				+ "<tr><td><h5>Uptime</h5></td><td>" + jvm['jvm.uptime'].value + "</td></tr>"
+				+ "<tr><td><h5>FD Usage</h5></td><td>" + formatNumber(jvm['jvm.fd.usage'].value, 2) + "</td></tr>"
+				+ "<tr><td><h5>Daemon Threads</h5></td><td>" + jvm['jvm.thread-states.daemon.count'].value + "</td></tr>"
+				+ "<tr><td><h5>Threads</h5></td><td>" + jvm['jvm.thread-states.count'].value + "</td></tr>"
+				+ "<tr><td><h5>Deadlocks</h5></td><td>" + jvm['jvm.thread-states.deadlocks'].value + "</td></tr>"
+				+ "</table><table class='jvmTable'><caption>Thread States</caption>"
+				+ "<tr><td><h5>Terminated</h5></td><td>" + jvm['jvm.thread-states.terminated.count'].value + "</td></tr>"
+				+ "<tr><td><h5>Timed Waiting</h5></td><td>" + jvm['jvm.thread-states.timed_waiting.count'].value + "</td></tr>"
+				+ "<tr><td><h5>Blocked</h5></td><td>" + jvm['jvm.thread-states.blocked.count'].value + "</td></tr>"
+				+ "<tr><td><h5>Waiting</h5></td><td>" + jvm['jvm.thread-states.waiting.count'].value + "</td></tr>"
+				+ "<tr><td><h5>Runnable</h5></td><td>" + jvm['jvm.thread-states.runnable.count'].value + "</td></tr>"
+				+ "<tr><td><h5>New</h5></td><td>" + jvm['jvm.thread-states.new.count'].value + "</td></tr>"
 				+ "</table></div></div>";
 
 		vmDiv.html(html);
@@ -639,8 +639,8 @@
 	function drawWeb(webInfo) {
 		var parentDiv = $("#" + webInfo.divId);
 		var html = "<div class='metricsWatcher web metricGraph col-md-12'>"
-				+ "<fieldset><legend><h1>" + webInfo.title + "</h1></legend>"
-				+ "<div class='webContainer col-md-12'>"
+				+ "<fieldset><legend><h1 class='btn-link' data-toggle='collapse' data-target='#"+webInfo.divId+"Collapse'>" + webInfo.title + "</h1></legend>"
+				+ "<div class='webContainer col-md-12' id='"+webInfo.divId+"Collapse'>"
 				+ "	<div id='" + webInfo.divId + "Web'></div>"
 				+ "<table><tr>"
 				+ "<td colspan='4' class='requestsGraph col-md-12'></td>"
@@ -684,8 +684,8 @@
 	function drawLog4j(log4jInfo) {
 		var parentDiv = $("#" + log4jInfo.divId);
 		var html = "<div class='metricsWatcher log4j metricGraph col-md-12'>"
-				+ "<fieldset><legend><h1>" + log4jInfo.title + "</h1></legend>"
-				+ "<div class='log4jContainer col-md-12'>"
+				+ "<fieldset><legend><h1 class='btn-link' data-toggle='collapse' data-target='#"+log4jInfo.divId+"Collapse'>" + log4jInfo.title + "</h1></legend>"
+				+ "<div class='log4jContainer col-md-12' id='"+log4jInfo.divId+"Collapse'>"
 				+ "	<div id='" + log4jInfo.divId + "Log4j'></div>"
 				+ "<table><tr>"
 				+ "<td colspan='4' class='col-md-12'></td>"
@@ -715,5 +715,5 @@
 			updateMeter(log4jInfo.components.meters[i], json);
 		}
 	}
-    
+
 }(window.metricsWatcher = window.metricsWatcher || {}, jQuery));

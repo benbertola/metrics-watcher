@@ -4,19 +4,18 @@
 	<meta charset="utf-8">
 	<title>Metrics-Watcher Examples</title>
 
-	<!--  You must include bootstrap
-	<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-	-->
+	<!-- must include jquery -->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+	<!-- must include bootstrap -->
 	<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
-	<!-- And include the metrics stylesheet -->
-	<link href="../metrics-watcher-style.css" rel="stylesheet">
-
-	<!-- And include jquery -->
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 	<!--  And include the metrics-watcher library -->
 	<script src="../metrics-watcher.js"></script>
+	<!-- And include the metrics stylesheet -->
+	<link href="../metrics-watcher-style.css" rel="stylesheet">
 
 	<!--  Here is the sample data - this would normally come from an Ajax call to the Metrics servlet -->
 	<script src="example-metrics.js"></script>
@@ -24,25 +23,28 @@
 	<script>
 		// See example-metrics.js for sample of the Metrics-servlet format
 		function addGraphs() {
-			metricsWatcher.addMeter("meterExample", "com.yammer.metrics.web.WebappMetricsFilter",
+			metricsWatcher.addMeter("meterExample", "com.codahale.metrics.servlet.AbstractInstrumentedFilter",
 					"responseCodes.ok", 10, "Meter");
 
-			metricsWatcher.addCounter("counterExample", "com.yammer.metrics.web.WebappMetricsFilter",
-					"activeRequests", 2, "Counter");
+			metricsWatcher.addCounter("counterExample", 
+					"com.codahale.metrics.servlet.AbstractInstrumentedFilter", "activeRequests",
+					 2, "Counter");
 
 			metricsWatcher.addLinkedCounter("linkedCounterExample",
-					"com.iovation.metrics.watcher.example.ConnectionPool", "connectionsInUseCounter",
-					"com.iovation.metrics.watcher.example.ConnectionPool", "connectionsCreatedCounter",
+					"com.codahale.metrics.servlet.AbstractInstrumentedFilter", "activeRequests",
+					"com.codahale.metrics.servlet.AbstractInstrumentedFilter", "totalRequests",
 					"Linked Counter");
 
-			metricsWatcher.addGauge("gaugeExample", "net.sf.ehcache.Cache.flapjack.flapjack.entity.Session",
-					"accuracy", "Gauge");
+			metricsWatcher.addGauge("gaugeExample", "jvm.memory.non-heap",
+					"max", "Gauge");
 
-			metricsWatcher.addTimer("timerExample", "flapjack.controller.HomeController", "home", 125, "Timer", "requests", 50);
-			metricsWatcher.addCache("queryCache", "net.sf.ehcache.Cache.flapjack.org.hibernate.cache.internal.StandardQueryCache", "Ehcache");
-			metricsWatcher.addLog4j("log4jExample", "org.apache.log4j.Appender", "Log4j");
-			metricsWatcher.addWeb("webExample", "com.yammer.metrics.web.WebappMetricsFilter", "Web Server");
-			metricsWatcher.addJvm("jvmExample", "jvm", "JVM");
+			metricsWatcher.addTimer("timerExample", "com.codahale.metrics.servlet.AbstractInstrumentedFilter", "requests", 1, "Timer", "requests", 1);
+
+			metricsWatcher.addJvm("jvmExample", "jvm", "JVM Statistics");
+
+			metricsWatcher.addCache("queryCache", "net.sf.ehcache.Cache.cacheName", "Ehcache");
+//			metricsWatcher.addLog4j("log4jExample", "org.apache.log4j.Appender", "Log4j");
+			metricsWatcher.addWeb("webExample", "com.codahale.metrics.servlet.AbstractInstrumentedFilter", "Web Server");
 		}
 
 		$(document).ready(function() {
