@@ -161,7 +161,7 @@ var exampleMetricsData =
 		      "count" : 1
 		    },
 		    "com.codahale.metrics.servlet.AbstractInstrumentedFilter.totalRequests" : {
-			      "count" : 1
+			      "count" : 12
 			    }
 		  },
 		  "histograms" : { },
@@ -243,27 +243,8 @@ var exampleMetricsData =
 		      "duration_units" : "seconds",
 		      "rate_units" : "calls/second"
 		    },
-		    "com.fifththird.cb.heat.employee.EmployeeUserDetailsService.buildDetails" : {
-		      "count" : 0,
-		      "max" : 0.0,
-		      "mean" : 0.0,
-		      "min" : 0.0,
-		      "p50" : 0.0,
-		      "p75" : 0.0,
-		      "p95" : 0.0,
-		      "p98" : 0.0,
-		      "p99" : 0.0,
-		      "p999" : 0.0,
-		      "stddev" : 0.0,
-		      "m15_rate" : 0.0,
-		      "m1_rate" : 0.0,
-		      "m5_rate" : 0.0,
-		      "mean_rate" : 0.0,
-		      "duration_units" : "seconds",
-		      "rate_units" : "calls/second"
-		    },
 		    "net.sf.ehcache.Cache.cacheName.gets" : {
-			      "count" : 12,
+			      "count" : 7,
 			      "max" : 0.18164320000000002,
 			      "mean" : 0.018164320000000002,
 			      "min" : 0.0018164320000000002,

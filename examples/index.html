@@ -34,6 +34,13 @@
 					"com.codahale.metrics.servlet.AbstractInstrumentedFilter", "activeRequests",
 					"com.codahale.metrics.servlet.AbstractInstrumentedFilter", "totalRequests",
 					"Linked Counter");
+			
+			metricsWatcher.addLinkedCounter("linkedTimerCounterExample",
+					"net.sf.ehcache.Cache.cacheName", "gets",
+					"com.codahale.metrics.servlet.AbstractInstrumentedFilter", "requests",
+					"Linked Counter");
+
+			
 
 			metricsWatcher.addGauge("gaugeExample", "jvm.memory.non-heap",
 					"max", "Gauge");
@@ -98,6 +105,7 @@
 			<div id="meterExample" class="col-md-3"></div>
 			<div id="counterExample" class="col-md-3"></div>
 			<div id="linkedCounterExample" class="col-md-3"></div>
+			<div id="linkedTimerCounterExample" class="col-md-3"></div>
 			<div id="gaugeExample" class="col-md-3"></div>
 		</div>
 		<br />
