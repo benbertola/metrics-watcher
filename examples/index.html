@@ -4,27 +4,18 @@
 	<meta charset="utf-8">
 	<title>Metrics-Watcher Examples</title>
 
-	<style>
-	body {
-		padding-top: 60px;
-		/* 60px to make the container go all the way to the bottom of the topbar */
-	}
-	</style>
+	<!-- must include jquery -->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
-	<!--  You must include bootstrap
-	<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-	-->
-	<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css" />
-	<link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<!-- must include bootstrap -->
+	<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
-	<!-- And include the metrics stylesheet -->
-	<link href="../metrics-watcher-style.css" rel="stylesheet">
-
-	<!-- And include jquery -->
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 	<!--  And include the metrics-watcher library -->
 	<script src="../metrics-watcher.js"></script>
+	<!-- And include the metrics stylesheet -->
+	<link href="../metrics-watcher-style.css" rel="stylesheet">
 
 	<!--  Here is the sample data - this would normally come from an Ajax call to the Metrics servlet -->
 	<script src="example-metrics.js"></script>
@@ -32,25 +23,35 @@
 	<script>
 		// See example-metrics.js for sample of the Metrics-servlet format
 		function addGraphs() {
-			metricsWatcher.addMeter("meterExample", "com.yammer.metrics.web.WebappMetricsFilter",
+			metricsWatcher.addMeter("meterExample", "com.codahale.metrics.servlet.AbstractInstrumentedFilter",
 					"responseCodes.ok", 10, "Meter");
 
-			metricsWatcher.addCounter("counterExample", "com.yammer.metrics.web.WebappMetricsFilter",
-					"activeRequests", 2, "Counter");
+			metricsWatcher.addCounter("counterExample", 
+					"com.codahale.metrics.servlet.AbstractInstrumentedFilter", "activeRequests",
+					 2, "Counter");
 
 			metricsWatcher.addLinkedCounter("linkedCounterExample",
-					"com.iovation.metrics.watcher.example.ConnectionPool", "connectionsInUseCounter",
-					"com.iovation.metrics.watcher.example.ConnectionPool", "connectionsCreatedCounter",
+					"com.codahale.metrics.servlet.AbstractInstrumentedFilter", "activeRequests",
+					"com.codahale.metrics.servlet.AbstractInstrumentedFilter", "totalRequests",
+					"Linked Counter");
+			
+			metricsWatcher.addLinkedCounter("linkedTimerCounterExample",
+					"net.sf.ehcache.Cache.cacheName", "gets",
+					"com.codahale.metrics.servlet.AbstractInstrumentedFilter", "requests",
 					"Linked Counter");
 
-			metricsWatcher.addGauge("gaugeExample", "net.sf.ehcache.Cache.flapjack.flapjack.entity.Session",
-					"accuracy", "Gauge");
+			
 
-			metricsWatcher.addTimer("timerExample", "flapjack.controller.HomeController", "home", 125, "Timer", "requests", 50);
-			metricsWatcher.addCache("queryCache", "net.sf.ehcache.Cache.flapjack.org.hibernate.cache.internal.StandardQueryCache", "Ehcache");
-			metricsWatcher.addLog4j("log4jExample", "org.apache.log4j.Appender", "Log4j");
-			metricsWatcher.addWeb("webExample", "com.yammer.metrics.web.WebappMetricsFilter", "Web Server");
-			metricsWatcher.addJvm("jvmExample", "jvm", "JVM");
+			metricsWatcher.addGauge("gaugeExample", "jvm.memory.non-heap",
+					"max", "Gauge");
+
+			metricsWatcher.addTimer("timerExample", "com.codahale.metrics.servlet.AbstractInstrumentedFilter", "requests", 1, "Timer", "requests", 1);
+
+			metricsWatcher.addJvm("jvmExample", "jvm", "JVM Statistics");
+
+			metricsWatcher.addCache("queryCache", "net.sf.ehcache.Cache.cacheName", "Ehcache");
+//			metricsWatcher.addLog4j("log4jExample", "org.apache.log4j.Appender", "Log4j");
+			metricsWatcher.addWeb("webExample", "com.codahale.metrics.servlet.AbstractInstrumentedFilter", "Web Server");
 		}
 
 		$(document).ready(function() {
@@ -85,50 +86,48 @@
 	</script>
 </head>
 <body>
-	<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
+	<nav class="navbar navbar-default navbar-static-top" role="navigation">
+				<a class="btn navbar-btn" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="glyphicon-bar"></span>
+					<span class="glyphicon-bar"></span>
+					<span class="glyphicon-bar"></span>
 				</a>
-				<a class="brand" href="#">Metrics Watcher Examples</a>
-				<div class="nav-collapse">
+				<a class="navbar-brand" href="#">Metrics Watcher Examples</a>
+				<div class="navbar-collapse">
 					<ul class="nav"></ul>
 				</div>
-			</div>
-		</div>
-	</div>
+	</nav>
+
 	<div class="container mainContent">
 		<p>Metrics Watcher currently supports these basic gauge types:</p>
 		<br />
-		<div class="row-fluid">
-			<div id="meterExample" class="span3"></div>
-			<div id="counterExample" class="span3"></div>
-			<div id="linkedCounterExample" class="span3"></div>
-			<div id="gaugeExample" class="span3"></div>
+		<div class="row">
+			<div id="meterExample" class="col-md-3"></div>
+			<div id="counterExample" class="col-md-3"></div>
+			<div id="linkedCounterExample" class="col-md-3"></div>
+			<div id="linkedTimerCounterExample" class="col-md-3"></div>
+			<div id="gaugeExample" class="col-md-3"></div>
 		</div>
 		<br />
 		<p>Metrics Watcher also comes with graphs composed of multiple gauges to support the types of instrumentation the Metrics library implements:</p>
 		<br />
-		<div class="row-fluid">
+		<div class="row">
 			<div id="webExample"></div>
 		</div>
 		<br/>
-		<div class="row-fluid">
+		<div class="row">
 			<div id="log4jExample"></div>
 		</div>
 		<br />
-		<div class="row-fluid">
+		<div class="row">
 			<div id="jvmExample"></div>
 		</div>
 		<br />
-		<div class="row-fluid">
+		<div class="row">
 			<div id="timerExample"></div>
 		</div>
 		<br />
-		<div class="row-fluid">
+		<div class="row">
 			<div id="queryCache"></div>
 		</div>
 		<br />

@@ -1,19 +1,19 @@
-.metricsWatcher h1 {
+.metricsWatcher .heading1 {
 	font-size: 30px;
 	line-height: 36px;
 	margin: 0;
 }
-.metricsWatcher h3 {
+.metricsWatcher .heading3 {
 	font-size: 18px;
 	line-height: 27px;
 	margin: 0;
 }
-.metricsWatcher h4 {
+.metricsWatcher .heading4 {
 	font-size: 14px;
 	line-height: 18px;
 	margin: 0;
 }
-.metricsWatcher h5 {
+.metricsWatcher .heading5 {
 	font-size: 18px;
 	line-height: 18px;
 	margin: 0;
@@ -30,7 +30,7 @@
 .metricsWatcher .activeRequestsGraph {
 	vertical-align: top;
 }
-.metricsWatcher .activeRequestsGraph .counter {
+.metricsWatcher .activeRequestsGraph .counter .histogram {
 	width: 95%;
 }
 
@@ -46,11 +46,12 @@
 	color: #666;
 }
 
+.metricsWatcher.histogram .histogramContainer td,
 .metricsWatcher.timer .timerContainer td,
 .metricsWatcher .progressLabel,
 .metricsWatcher .progressValue {
 	vertical-align: top;
-	padding: 0 5px;
+	padding: 0px 5px;
 }
 .metricsWatcher .progressValue {
 	font-size: 13px;
@@ -63,6 +64,7 @@
 }
 
 .metricsWatcher.timer table,
+.metricsWatcher.histogram table,
 .metricsWatcher.web table,
 .metricsWatcher.log4j table,
 .metricsWatcher.cache table,
@@ -72,9 +74,9 @@
 .metricsWatcher .progressTable {
 	width: 100%;
 	font-size: 13px;
-	line-height: 18px;
 }
 
+.metricsWatcher.histogram .histogramContainer,
 .metricsWatcher.jvm .jvmContainer,
 .metricsWatcher.web .webContainer,
 .metricsWatcher.log4j .log4jContainer,
@@ -88,11 +90,6 @@
 	padding: 10px;
 }
 
-.metricsWatcher.cache table.gaugeTable td,
-.metricsWatcher.jvm table.jvmTable td {
-	vertical-align: top;
-	padding: 6px 0;
-}
 .metricsWatcher.cache table.gaugeTable td h5,
 .metricsWatcher.jvm table.jvmTable td h5 {
 	font-size: 15px;
@@ -103,4 +100,8 @@
 .metricsWatcher table.jvmTable td {
 	font-size: 14px;
 	text-align: right;
+}
+
+caption{
+	font-weight: bold;
 }
