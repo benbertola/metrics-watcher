@@ -62,7 +62,7 @@
 
 		function keepUpdatingGraphs() {
 			downloadMetricData();
-			setTimeout(keepUpdatingGraphs, 500000);
+			setTimeout(keepUpdatingGraphs, 60000); // 1 minute
 		}
 
 		function downloadMetricData() {
@@ -75,10 +75,10 @@
 			// 			contentType : "application/json",
 			// 			url : url,
 			// 			success : function(data) {
-			// 				updateGraphs(data);
+			// 				metricsWatcher.updateGraphs(data);
 			// 			},
 			// 			error : function(xhr, ajaxOptions, thrownError) {
-			// 				alert("Error - " + xhr.status + "Message: " + thrownError);
+			// 				metricsWatcher.initGraphs();
 			// 			},
 			// 			async : false
 			// 		});
