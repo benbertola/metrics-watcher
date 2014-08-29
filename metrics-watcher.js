@@ -56,6 +56,29 @@
 		graphs.push(metricInfo);
 	};
 
+	/**
+	* Add a Counter or Gauge as a Gauge type graph to your page.
+	*
+	* @param divId The id of the div to draw the graph in
+	* @param className The class name of your metrics data, from the metrics servlet
+	* @param metricName The metric name of your metrics data, from the metrics servlet
+	* @param title The user-displayed title of this graph
+	*/
+	metricsWatcher.addCounterGauge = function(divId, className, metricName, title) {
+		var metricInfo = new MetricInfo(divId, className, metricName, null, title, 'counterGauges');
+	
+		metricInfo.getMetricNode = function getMetricNode(className, metricName, jsonRoot) {
+			var node = !(jsonRoot["counters"][className + '.' + metricName]) ? null : jsonRoot["counters"][className + '.' + metricName];
+			if (node) {
+				return node;
+			} else {
+				return !(jsonRoot["gauges"][className + '.' + metricName]) ? null : jsonRoot["gauges"][className + '.' + metricName];
+			}
+		};
+		
+		graphs.push(metricInfo);
+	};
+
 		/**
 	 * Add a standalone Histogram graph
 	 *
@@ -232,7 +255,7 @@
 	metricsWatcher.initGraphs = function() {
 		// draw all graphs for the first time
 		for (var i = 0; i < graphs.length; i++) {
-			if (graphs[i].type == "gauges")
+			if (graphs[i].type == "gauges" || graphs[i].type == "counterGauges")
 				drawGauge(graphs[i]);
 			else if (graphs[i].type == "meters")
 				drawMeter(graphs[i]);
@@ -263,7 +286,7 @@
 	 */
 	metricsWatcher.updateGraphs = function(json) {
 		for (var i = 0; i < graphs.length; i++) {
-			if (graphs[i].type == "gauges")
+			if (graphs[i].type == "gauges"|| graphs[i].type == "counterGauges")
 				updateGauge(graphs[i], json);
 			else if (graphs[i].type == "meters")
 				updateMeter(graphs[i], json);
@@ -524,7 +547,7 @@
 		// set the big counter
 		var gaugeDiv = $("#" + meterInfo.divId + " div.counterVal");
 
-		gaugeDiv.html(meterData.rate_units + " (" + meterData.count + " total)");
+		gaugeDiv.html((meterData.rate_units || meterData.units) + " (" + meterData.count + " total)");
 
 		var maxRate = Math.max(meterData['mean_rate'],meterData['m1_rate'],meterData['m5_rate'],meterData['m15_rate']);
 
@@ -561,7 +584,7 @@
 	}
 	function updateGaugeData(gaugeInfo, gaugeData) {
 		var gaugeDiv = $("#" + gaugeInfo.divId + " div.gaugeDataVal");
-		gaugeDiv.html(gaugeData.value);
+		gaugeDiv.html(gaugeData.value || gaugeData.count);
 	}
 
 	/*
