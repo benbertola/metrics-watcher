@@ -1,6 +1,6 @@
 Metrics-Watcher
 ===============
-JavaScript library that graphs Metrics(http://metrics.dropwizard.io) and allows for 
+JavaScript library that graphs Metrics (http://metrics.dropwizard.io) and allows for 
 real time updating of graph data using the Metrics servlet.
 
 This library depends on using the following other libraries in your applications:
